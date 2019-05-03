@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/cuadro-blanco.png</file>
+        <file>imagenes/cuadro-negro.png</file>
+        <file>imagenes/fondo.jpg</file>
+        <file>imagenes/pp,550x550.u1.jpg</file>
+    </qresource>
+</RCC>
