@@ -5,7 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         gladiador.cpp \
-        main.cpp
+        list.cpp \
+        main.cpp \
+        node.cpp \
+        poblacion.cpp
 
 HEADERS += \
-    gladiador.h
+    gladiador.h \
+    list.h \
+    node.h \
+    poblacion.h
