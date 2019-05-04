@@ -40,6 +40,7 @@ private:
     int fuerzaSuperior;
     int fuerzaInferior;
     int resistencia;
+    int SendJson();
 };
 
 #endif // GLADIADOR_H
