@@ -1,18 +1,18 @@
 #include "node.h"
 #include <iostream>
 
-Node :: Node(Node* _nxtPtr, Gladiador _data) {
+Node :: Node(Node* _nxtPtr, Gladiador* _data) {
     nxtPtr = _nxtPtr;
     data = _data;
 }
-void Node::set_data(Gladiador _data) {
+void Node::set_data(Gladiador* _data) {
     data = _data;
 }
 void Node::set_nxtNd(Node* _nxtNd) {
     nxtPtr = _nxtNd;
     //std::cout<<&_nxtNd<<std::endl;
 }
-Gladiador Node::get_data() {
+Gladiador* Node::get_data() {
     //std::cout<<data<<std::endl;
     return data;
 }

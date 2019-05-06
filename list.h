@@ -15,6 +15,7 @@ public:
     int getSize();
     Node* getLast();
     void insertLast(Gladiador *gladiador);
+    Gladiador* recorrer(int indice);
 private:
 
     Node* pointerHead= nullptr;

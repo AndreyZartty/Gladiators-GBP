@@ -20,19 +20,24 @@
 #define MAXDATASIZE 1000
 
 using namespace std;
+Gladiador::Gladiador(){};
 Gladiador::Gladiador(int generacion)
 {
     if (generacion == 1){
-        srand (time(NULL));
-        int random = rand() % 60 +15;
+        //srand (time(NULL));
+        int random = 15 + rand() % (61 - 15);
         setEdad(random);
-        random = rand() % 4 +1;
+        random = 1 + rand() % (5 - 1);
+
         setInteligencia(random);
-        random = rand() % 4 +1;
+        random = 1 + rand() % (5 - 1);
+
         setCondicionFisica(random);
-        random = rand() % 4 +1;
+        random = 1 + rand() % (5 - 1);
+
         setFuerzaSuperior(random);
-        random = rand() % 4 +1;
+        random = 1 + rand() % (5 - 1);
+
         setFuerzaInferior(random);
         setResistencia();
         setExpectativaVida(getResistencia()/10);
@@ -112,7 +117,7 @@ void Gladiador::setResistencia()
 
     resistencia = resist;
 
-    cout << resistencia << endl;
+    cout <<"resistencia: " <<resistencia << endl;
 }
 
 

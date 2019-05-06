@@ -9,6 +9,7 @@ using namespace std;
 class Gladiador
 {
 public:
+    Gladiador();
     Gladiador(int generacion);
     Gladiador(int generacion, Gladiador *padre1, Gladiador *parte2);
     void setNombre(string Nombre);

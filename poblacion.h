@@ -12,10 +12,13 @@ public:
     void setGeneracion(int Generacion);
     void insertarGladiador(Gladiador* gladiador);
     List getGladiadores();
+    void setMejor();
+    Gladiador* getMejor();
 
 private:
     List gladiadores;
     int generacion=1;
+    Gladiador* mejor;
 };
 
 #endif // POBLACION_H

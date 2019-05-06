@@ -8,8 +8,8 @@ Node* List::getPointerHead() {
 void List::setPointerHead(Node* head) {
     pointerHead = head;
 }
-void List::insertFirst(Gladiador *gladiador) {
-    Node* pointeraux = new Node(pointerHead, *gladiador);
+void List::insertFirst(Gladiador* gladiador) {
+    Node* pointeraux = new Node(pointerHead, gladiador);
     setPointerHead(pointeraux);
 }
 
@@ -23,6 +23,15 @@ int List::getSize() {
     return c;
 }
 
+Gladiador* List::recorrer(int indice){
+    Node *current = getPointerHead();
+    while(indice>0){
+        current = current->get_nxtPtr();
+        indice--;
+    }
+    return current->get_data();
+}
+
 Node *List::getLast() {
     Node *current = getPointerHead();
     while(current->get_nxtPtr() != nullptr){
@@ -31,8 +40,8 @@ Node *List::getLast() {
     return current;
 }
 
-void List::insertLast(Gladiador *gladiador) {
-    Node* aux = new Node(nullptr, *gladiador);
+void List::insertLast(Gladiador* gladiador) {
+    Node* aux = new Node(nullptr, gladiador);
     if(pointerHead==nullptr){
         setPointerHead(aux);
     }
