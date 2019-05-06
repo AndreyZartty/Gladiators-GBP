@@ -7,15 +7,17 @@
 class Poblacion
 {
 public:
-    Poblacion();
+    Poblacion(string _nombrePoblacion);
     int getGeneracion();
     void setGeneracion(int Generacion);
     void insertarGladiador(Gladiador* gladiador);
     List getGladiadores();
     void setMejor();
     Gladiador* getMejor();
+    string getNombrePoblacion();
 
 private:
+    string nombrePoblacion;
     List gladiadores;
     int generacion=1;
     Gladiador* mejor;

@@ -1,13 +1,30 @@
 #include "poblacion.h"
 #include "gladiador.h"
 
-Poblacion::Poblacion()
-{
+#include <stdio.h>
+
+Poblacion::Poblacion(string _nombrePoblacion)
+{   
+    nombrePoblacion = _nombrePoblacion;
+    char vocales [] = {"aeiou"};
+    char consonantes [] = {"bcdfghjlmnprstv"};
+    string nombre;
     setGeneracion(1);
     for (int i=0; i <10; i++){
+            nombre = "";
             Gladiador* gladiador = new Gladiador(getGeneracion());
+            for (int i = 3; i > 0; i--){
+                int r1 = rand() % 11;
+                int r2 = rand() % 4;
+                char letra1 = consonantes[r1];
+                char letra2 = vocales[r2];
+                string s1 (1, letra1);
+                string s2 (1, letra2);
+                nombre = nombre+s1+s2;
+            }
+            gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
-            cout<< "Se ha creado el gladiador: "<< i+1 <<endl;
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<endl;
     }
     setMejor();
 }
@@ -32,6 +49,10 @@ List Poblacion::getGladiadores()
     return gladiadores;
 }
 
+string Poblacion::getNombrePoblacion(){
+    return nombrePoblacion;
+}
+
 void Poblacion::setMejor(){
     Gladiador* temp;
     mejor=gladiadores.recorrer(0);
@@ -44,6 +65,6 @@ void Poblacion::setMejor(){
 }
 
 Gladiador* Poblacion::getMejor(){
-    cout<<"El mejor es: "<<mejor->getResistencia()<<endl;
+    cout<<"El mejor de la poblacion "<< nombrePoblacion <<" es: "<<mejor->getNombre()<<endl;
     return mejor;
 }
