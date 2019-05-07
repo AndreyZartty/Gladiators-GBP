@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    tablero.cpp
+    tablero.cpp \
+    node.cpp \
+    torres.cpp
 
 HEADERS  += mainwindow.h \
-    tablero.h
+    tablero.h \
+    node.h \
+    torres.h
 
 FORMS    += mainwindow.ui
 

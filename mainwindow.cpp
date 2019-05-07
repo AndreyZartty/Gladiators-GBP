@@ -29,10 +29,10 @@ void MainWindow::on_Inicio_clicked()
 
     //Crea el laberinto
 
-    QGraphicsTextItem *datos = new QGraphicsTextItem;
-    datos->setScale(3);
-    datos->setPos(350,30);
-    datos->setPlainText("Bienvenido A La Gran Batalla");
+    QGraphicsTextItem *titulo = new QGraphicsTextItem;
+    titulo->setScale(3);
+    titulo->setPos(300,10);
+    titulo->setPlainText("Bienvenido A La Gran Batalla");
 
     //crear View
     QGraphicsView * view = new QGraphicsView(partida);
@@ -43,16 +43,22 @@ void MainWindow::on_Inicio_clicked()
     partida->setSceneRect(0,0,1200,600);
     partida->backgroundBrush();
 
-    Tablero* tablero = new Tablero();
-    tablero->generar(7);
-    tablero->imprimir();
+    //Pixeles X y Y
+    int pixX = 380;
+    int pixY = 100;
 
+    int xInicial=pixX;
+    int yInicial=pixY;
+
+    //Crea un tablero
+    Tablero* tablero = new Tablero();
+    tablero->generar(10);
+    tablero->imprimir();
     printf("\n");
 
     //Agrega todos los elementos a la partida
-
     partida->addPixmap(QPixmap(":/imagenes/fondo.jpg"));
-    partida->addItem(datos);
+    partida->addItem(titulo);
 
     //para mostrar los cuadros de la matriz en partida
     int num = tablero->getnumMatriz();
@@ -65,13 +71,6 @@ void MainWindow::on_Inicio_clicked()
     QPixmap *cuadroN = new QPixmap(":/imagenes/cuadro-negro.png");
     cuadroN->setDevicePixelRatio(5);
 
-    //Pixeles X y Y
-    int pixX = 350;
-    int pixY = 100;
-
-    int xInicial=pixX;
-    int yInicial=pixY;
-
     int cuadro=0;
     int suma=45;
 
@@ -81,6 +80,10 @@ void MainWindow::on_Inicio_clicked()
         for (int i=0;i<num;i++){
 
             for (int j=0;j<num;j++){
+
+                //Modifica los x y y de cada node del tablero
+                tablero->getNode(i,j)->setX(pixX);
+                tablero->getNode(i,j)->setY(pixY);
 
                 if (cuadro==0){
                     partida->addPixmap(*cuadroN)->moveBy(pixX,pixY);
@@ -111,6 +114,10 @@ void MainWindow::on_Inicio_clicked()
 
             for (int j=0;j<num;j++){
 
+                //Modifica los x y y de cada node del tablero
+                tablero->getNode(i,j)->setX(pixX);
+                tablero->getNode(i,j)->setY(pixY);
+
                 if (cuadro==0){
                     partida->addPixmap(*cuadroN)->moveBy(pixX,pixY);
                     cuadro++;
@@ -123,6 +130,36 @@ void MainWindow::on_Inicio_clicked()
             }
             pixX=xInicial;
             pixY=pixY+suma;
+        }
+    }
+
+    //Para generar torres aleatorias
+    for (int t=0; t<20; t++){
+        int f = rand()%num;
+        int c = rand()%num;
+
+        if (f==0 & c==0){
+            t=t-1;
+        }
+
+        else if (f==num & c==num){
+            t=t-1;
+        }
+
+        else if (tablero->getNode(f,c)->getTorre()->getEstado() == false) {
+
+            tablero->getNode(f,c)->getTorre()->setEstado(true);
+
+            QPixmap *torre = tablero->getNode(f,c)->getTorre()->getTorre();
+
+            int x = tablero->getNode(f,c)->getX();
+            int y = tablero->getNode(f,c)->getY();
+
+            partida->addPixmap(*torre)->moveBy(x,y);
+
+        }
+        else{
+            t=t-1;
         }
     }
 

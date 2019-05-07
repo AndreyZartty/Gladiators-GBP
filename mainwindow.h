@@ -5,8 +5,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
-#include "tablero.h"
 #include <stdio.h>
+
+#include "tablero.h"
 
 namespace Ui {
 class MainWindow;

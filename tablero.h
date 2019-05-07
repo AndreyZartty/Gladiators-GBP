@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
+#include "node.h"
 
 class Tablero : public QObject, public QGraphicsPixmapItem
 {
@@ -21,6 +22,8 @@ public:
 
     int getnumMatriz();
 
+    Node* getNode(int f, int c);
+
     int imprimir();
 
 signals:
@@ -28,7 +31,9 @@ signals:
 private:
     int numMatriz;
 
-    int **matrizF;
+    Node **matrizF;
+
+    Node* nodo;
 
 
 public slots:
