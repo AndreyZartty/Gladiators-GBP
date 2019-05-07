@@ -16,6 +16,7 @@ public:
     Node* getLast();
     void insertLast(Gladiador *gladiador);
     Gladiador* recorrer(int indice);
+    Gladiador* sacar(int indice);
 private:
 
     Node* pointerHead= nullptr;

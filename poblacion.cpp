@@ -14,7 +14,7 @@ Poblacion::Poblacion(string _nombrePoblacion)
             nombre = "";
             Gladiador* gladiador = new Gladiador(getGeneracion());
             for (int i = 3; i > 0; i--){
-                int r1 = rand() % 11;
+                int r1 = rand() % 14;
                 int r2 = rand() % 4;
                 char letra1 = consonantes[r1];
                 char letra2 = vocales[r2];
@@ -67,4 +67,15 @@ void Poblacion::setMejor(){
 Gladiador* Poblacion::getMejor(){
     cout<<"El mejor de la poblacion "<< nombrePoblacion <<" es: "<<mejor->getNombre()<<endl;
     return mejor;
+}
+
+void Poblacion::nuevageneracion(){
+    setGeneracion(generacion++);
+
+    Gladiador* temp;
+    for (int i=0;i<gladiadores.getSize();i++) {
+        temp = gladiadores.recorrer(i);
+        temp->setEdad(temp->getEdad()+15);
+        temp->setResistencia();
+    }
 }

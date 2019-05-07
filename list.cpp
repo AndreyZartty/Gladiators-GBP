@@ -32,6 +32,35 @@ Gladiador* List::recorrer(int indice){
     return current->get_data();
 }
 
+Gladiador* List::sacar(int indice){
+    Gladiador* res;
+    Node *current = getPointerHead();
+    if (indice==0){
+        current = current->get_nxtPtr();
+        res = pointerHead->get_data();
+        pointerHead->set_nxtNd(nullptr);
+        setPointerHead(current);
+    }else if (indice == getSize()-1) {
+        while(indice-1>0){
+            current = current->get_nxtPtr();
+            indice--;
+        }
+        res = current->get_data();
+        current->set_nxtNd(nullptr);
+    }else {
+        while(indice-1>0){
+            current = current->get_nxtPtr();
+            indice--;
+        }
+        Node *temp = current->get_nxtPtr();
+        current->set_nxtNd(temp->get_nxtPtr());
+        res = temp->get_data();
+        temp->set_nxtNd(nullptr);
+    }
+    return res;
+}
+
+
 Node *List::getLast() {
     Node *current = getPointerHead();
     while(current->get_nxtPtr() != nullptr){

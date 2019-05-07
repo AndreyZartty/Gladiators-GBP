@@ -15,10 +15,12 @@ public:
     void setMejor();
     Gladiador* getMejor();
     string getNombrePoblacion();
+    void nuevageneracion();
 
 private:
     string nombrePoblacion;
     List gladiadores;
+    List padres;
     int generacion=1;
     Gladiador* mejor;
 };

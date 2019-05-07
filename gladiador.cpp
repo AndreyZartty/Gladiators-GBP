@@ -48,7 +48,7 @@ Gladiador::Gladiador(int generacion)
         cout << "Introduzca los padres si no es la primera generacion" << endl;
     }
 }
-Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *parte2)
+Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *padre2)
 {
     if (generacion == 1){
         cout << "No introduzca padres, ya que no es de la primera generacion" << endl;
@@ -101,23 +101,27 @@ void Gladiador::setFuerzaInferior(int FI)
 void Gladiador::setResistencia()
 {
     int resist=0;
-    if(25 <= edad && edad <= 45){
-        resist += 20;
-    }
-    else if (25 > edad){
-        resist += 15;
-    }
-    else if (45 < edad){
-        resist += 10;
-    }
-    resist += 2*inteligencia;
-    resist += 2*condicionFisica;
-    resist += 2*fuerzaInferior;
-    resist += 2*fuerzaSuperior;
+    if(70<=edad){
 
+    }
+    else{
+        if(25 <= edad && edad <= 45){
+            resist += 20;
+        }
+        else if (25 > edad){
+            resist += 15;
+        }
+        else if (45 < edad){
+            resist += 10;
+        }
+        resist += 2*inteligencia;
+        resist += 2*condicionFisica;
+        resist += 2*fuerzaInferior;
+        resist += 2*fuerzaSuperior;
+    }
     resistencia = resist;
-
-    cout <<"resistencia: " <<resistencia << endl;
+    cout <<"resistencia de " << nombre << ": " <<resistencia << endl;
+    cout <<"edad: "<< edad << endl;
 }
 
 

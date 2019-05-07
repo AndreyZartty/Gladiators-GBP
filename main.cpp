@@ -17,14 +17,18 @@ int main()
     //Gladiador *g5 = new Gladiador(1);
     Poblacion *poblacion = new Poblacion("Lannister");
     poblacion->getMejor();
-    Poblacion *poblacion2 = new Poblacion("Stark");
-    poblacion2->getMejor();
+
+    //Poblacion *poblacion2 = new Poblacion("Stark");
+    //poblacion2->getMejor();
+
+
+    poblacion->nuevageneracion();
+    //cout<<00000000000<<endl;
+    //poblacion2->nuevageneracion();
     /**nuevo->setEdad(25);
     nuevo->setInteligencia(10);
     nuevo->setCondicionFisica(10);
     nuevo->setFuerzaInferior(10);
     nuevo->setFuerzaSuperior(10);
     nuevo->setResistencia();**/
-    char a[] = {"123"};
-    cout<<a[1]<<endl;
 }
