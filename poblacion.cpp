@@ -49,6 +49,10 @@ List Poblacion::getGladiadores()
     return gladiadores;
 }
 
+List Poblacion::getPadres(){
+    return padres;
+}
+
 string Poblacion::getNombrePoblacion(){
     return nombrePoblacion;
 }
@@ -74,8 +78,12 @@ void Poblacion::nuevageneracion(){
 
     Gladiador* temp;
     for (int i=0;i<gladiadores.getSize();i++) {
-        temp = gladiadores.recorrer(i);
-        temp->setEdad(temp->getEdad()+15);
-        temp->setResistencia();
+        if (gladiadores.recorrer(i)->getEdad()>=70){
+
+        }else {
+            temp = gladiadores.recorrer(i);
+            temp->setEdad(temp->getEdad()+15);
+            temp->setResistencia();
+        }
     }
 }

@@ -12,10 +12,12 @@ public:
     void setGeneracion(int Generacion);
     void insertarGladiador(Gladiador* gladiador);
     List getGladiadores();
+    List getPadres();
     void setMejor();
     Gladiador* getMejor();
     string getNombrePoblacion();
     void nuevageneracion();
+
 
 private:
     string nombrePoblacion;

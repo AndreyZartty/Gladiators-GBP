@@ -23,6 +23,14 @@ int main()
 
 
     poblacion->nuevageneracion();
+    poblacion->nuevageneracion();
+    for (int i=0;i<poblacion->getGladiadores().getSize(); i++) {
+        cout<<poblacion->getGladiadores().recorrer(i)->getNombre()<<endl;
+    }
+    cout<<"11111111111111111111111111111111"<<endl;
+    for (int i=0;i<poblacion->getPadres().getSize(); i++) {
+        cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
+    }
     //cout<<00000000000<<endl;
     //poblacion2->nuevageneracion();
     /**nuevo->setEdad(25);
