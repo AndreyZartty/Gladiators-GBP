@@ -7,11 +7,25 @@ SOURCES += \
         gladiador.cpp \
         list.cpp \
         main.cpp \
+        mainwindow.cpp \
         node.cpp \
-        poblacion.cpp
+        nodo.cpp \
+        poblacion.cpp \
+        tablero.cpp \
+        torres.cpp
 
 HEADERS += \
     gladiador.h \
     list.h \
+    mainwindow.h \
     node.h \
-    poblacion.h
+    nodo.h \
+    poblacion.h \
+    tablero.h \
+    torres.h
+
+RESOURCES += \
+    imagenes.qrc
+
+FORMS += \
+    mainwindow.ui

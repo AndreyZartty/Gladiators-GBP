@@ -5,6 +5,9 @@
 #include "poblacion.h"
 #include "list.h"
 
+#include "mainwindow.h"
+#include <QApplication>
+
 using namespace std;
 
 int main()
@@ -31,6 +34,12 @@ int main()
     for (int i=0;i<poblacion->getPadres().getSize(); i++) {
         cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
     }
+
+    QApplication a(argc, argv);
+        MainWindow w;
+        w.show();
+
+        return a.exec();
     //cout<<00000000000<<endl;
     //poblacion2->nuevageneracion();
     /**nuevo->setEdad(25);
