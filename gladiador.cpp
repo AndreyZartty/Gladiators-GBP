@@ -1,5 +1,6 @@
 #include "gladiador.h"
 
+#include <math.h>
 #include <time.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -20,6 +21,42 @@
 #define MAXDATASIZE 1000
 
 using namespace std;
+
+string decToBinary(int n)
+{
+    // Size of an integer is assumed to be 32 bits
+    string res;
+    for (int i = 3; i >= 0; i--) {
+        int k = n >> i;
+        if (k & 1)
+            res+="1";
+        else
+            res+= "0";
+    }
+    return res;
+}
+
+int binToDec(int binario)
+{
+    int exp,digito;
+    int decimal;
+    cout << "Binario: "<< binario<<endl;
+
+    exp=0;
+    decimal=0;
+    while(((int)(binario/10))!=0)
+    {
+
+        digito = (int)binario % 10;
+        decimal = decimal + digito * pow(2,exp);
+        exp++;
+        binario=(int)(binario/10);
+    }
+    decimal=decimal + binario * pow(2,exp);
+    cout << endl << "Decimal: " << decimal << endl;
+    return decimal;
+}
+
 Gladiador::Gladiador(){};
 Gladiador::Gladiador(int generacion)
 {
@@ -54,7 +91,25 @@ Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *padre2)
         cout << "No introduzca padres, ya que no es de la primera generacion" << endl;
     }
     else {
-
+        string cromosomaInte1 = decToBinary(padre1->getInteligencia()).substr(0,2);
+        string cromosomaInte2 = decToBinary(padre2->getInteligencia()).substr(2,4);
+        string cromosomaCond1 = decToBinary(padre1->getCondicionFisica()).substr(0,2);
+        string cromosomaCond2 = decToBinary(padre2->getCondicionFisica()).substr(2,4);
+        string cromosomaFuerzaSup1 = decToBinary(padre1->getFuerzaSuperior()).substr(0,2);
+        string cromosomaFuerzaSup2 = decToBinary(padre2->getFuerzaSuperior()).substr(2,4);
+        string cromosomaFuerzaInf1 = decToBinary(padre1->getFuerzaInferior()).substr(0,2);
+        string cromosomaFuerzaInf2 = decToBinary(padre2->getFuerzaInferior()).substr(2,4);
+        cout<<padre1->getInteligencia()<<endl;
+        cout<<cromosomaInte1<<endl;
+        setInteligencia(binToDec(atoi((cromosomaInte1+cromosomaInte2).c_str())));
+        setCondicionFisica(binToDec(atoi((cromosomaCond1+cromosomaCond2).c_str())));
+        setFuerzaSuperior(binToDec(atoi((cromosomaFuerzaSup1+cromosomaFuerzaSup2).c_str())));
+        setFuerzaInferior(binToDec(atoi((cromosomaFuerzaInf1+cromosomaFuerzaInf2).c_str())));
+        setEdad(20);
+        setResistencia();
+        setExpectativaVida(getResistencia()/10);
+        setProbabilidadSupervivencia(getResistencia()-4);
+        SendJson();
     }
 }
 

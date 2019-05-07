@@ -31,6 +31,10 @@ int main()
     for (int i=0;i<poblacion->getPadres().getSize(); i++) {
         cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
     }
+
+    Gladiador *g1 = new Gladiador(1);
+    Gladiador *g2 = new Gladiador(1);
+    Gladiador *g3 = new Gladiador(2, g1, g2);
     //cout<<00000000000<<endl;
     //poblacion2->nuevageneracion();
     /**nuevo->setEdad(25);
