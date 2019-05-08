@@ -1,7 +1,11 @@
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = Gladiators-GBP
 TEMPLATE = app
 CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
+
 
 SOURCES += \
         gladiador.cpp \
