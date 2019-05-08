@@ -157,29 +157,36 @@ void Gladiador::setResistencia()
 {
     int resist=0;
     if(70<=edad){
+        muerto=true;
+        resist += 10;
+    }
 
+    else if(25 <= edad && edad <= 45){
+        resist += 20;
     }
-    else{
-        if(25 <= edad && edad <= 45){
-            resist += 20;
-        }
-        else if (25 > edad){
-            resist += 15;
-        }
-        else if (45 < edad){
-            resist += 10;
-        }
-        resist += 2*inteligencia;
-        resist += 2*condicionFisica;
-        resist += 2*fuerzaInferior;
-        resist += 2*fuerzaSuperior;
+    else if (25 > edad){
+        resist += 15;
     }
+    else if (45 < edad){
+        resist += 10;
+    }
+    resist += 2*inteligencia;
+    resist += 2*condicionFisica;
+    resist += 2*fuerzaInferior;
+    resist += 2*fuerzaSuperior;
+
     resistencia = resist;
     cout <<"resistencia de " << nombre << ": " <<resistencia << endl;
     cout <<"edad: "<< edad << endl;
 }
 
+void Gladiador::morir(){
+    muerto=true;
+}
 
+bool Gladiador::getMuerto(){
+    return muerto;
+}
 
 string Gladiador::getNombre()
 {

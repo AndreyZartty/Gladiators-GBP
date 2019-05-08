@@ -24,7 +24,7 @@ Poblacion::Poblacion(string _nombrePoblacion)
             }
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
-            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<endl;
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
     }
     setMejor();
 }
@@ -58,20 +58,15 @@ void Poblacion::setPadres(){
     Gladiador *gtemp;
     for (int i=8;i>0;i--) {
         gtemp=ltemp.recorrer(0);
-        //int j=1;
         int x;
-        //while (j<x){
         for (int j=0;j<ltemp.getSize();j++) {
             if(ltemp.recorrer(j)->getResistencia()>gtemp->getResistencia()){
                 gtemp=ltemp.recorrer(j);
                 x= j;
-        //    }else {
-          //      j++;
             }
-
         }
-        ltemp.sacar(x);
-        cout<<gtemp->getNombre()<<endl;
+        //ltemp.sacar(x);
+        padres.insertLast(ltemp.sacar(x));
     }
     for (int h=0;h<ltemp.getSize();h++) {
         cout<<"ltemp "<<ltemp.recorrer(h)->getNombre()<<endl;
@@ -99,11 +94,53 @@ Gladiador* Poblacion::getMejor(){
 }
 
 void Poblacion::nuevageneracion(){
-    setGeneracion(generacion++);
+    //cout<<"oooh1"<<endl;
+    setGeneracion(generacion+=1);
+    //cout<<generacion<<endl;
     setPadres();
+
+
+    char vocales [] = {"aeiou"};
+    char consonantes [] = {"bcdfghjlmnprstv"};
+    string nombre;
+
+    for (int i=0; i <8; i+=2){
+            nombre = "";
+            Gladiador* gladiador = new Gladiador(getGeneracion(),padres.recorrer(i),padres.recorrer(i+1));
+            for (int i = 3; i > 0; i--){
+                int r1 = rand() % 14;
+                int r2 = rand() % 4;
+                char letra1 = consonantes[r1];
+                char letra2 = vocales[r2];
+                string s1 (1, letra1);
+                string s2 (1, letra2);
+                nombre = nombre+s1+s2;
+            }
+            gladiador->setNombre(nombre);
+            insertarGladiador(gladiador);
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
+    }
+
+    for (int i=0; i <8; i+=2){
+            nombre = "";
+            Gladiador* gladiador = new Gladiador(getGeneracion(),padres.recorrer(i+1),padres.recorrer(i));
+            for (int i = 3; i > 0; i--){
+                int r1 = rand() % 14;
+                int r2 = rand() % 4;
+                char letra1 = consonantes[r1];
+                char letra2 = vocales[r2];
+                string s1 (1, letra1);
+                string s2 (1, letra2);
+                nombre = nombre+s1+s2;
+            }
+            gladiador->setNombre(nombre);
+            insertarGladiador(gladiador);
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
+    }
+
     Gladiador* temp;
     for (int i=0;i<gladiadores.getSize();i++) {
-        if (gladiadores.recorrer(i)->getEdad()>=70){
+        if (gladiadores.recorrer(i)->getEdad()>=70 || gladiadores.recorrer(i)->getMuerto()){
 
         }else {
             temp = gladiadores.recorrer(i);

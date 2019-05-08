@@ -21,6 +21,7 @@ public:
     void setFuerzaSuperior(int FS);
     void setFuerzaInferior(int FI);
     void setResistencia();
+    void morir();
     int getEdad();
     int getProbabilidadSupervivencia();
     int getExpectativaVida();
@@ -30,6 +31,7 @@ public:
     int getFuerzaInferior();
     int getResistencia();
     string getNombre();
+    bool getMuerto();
 
 private:
     string nombre;
@@ -41,6 +43,7 @@ private:
     int fuerzaSuperior;
     int fuerzaInferior;
     int resistencia;
+    bool muerto=false;
     int SendJson();
 };
 
