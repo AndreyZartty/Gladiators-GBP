@@ -64,12 +64,10 @@ void MainWindow::on_Inicio_clicked()
     int num = tablero->getnumMatriz();
 
     //Cuadro Blanco
-    QPixmap *cuadroB = new QPixmap(":/imagenes/cuadro-blanco.png");
-    cuadroB->setDevicePixelRatio(5);
+    QPixmap *cuadroB = tablero->getcuadroB();
 
     //Cuadro Negro
-    QPixmap *cuadroN = new QPixmap(":/imagenes/cuadro-negro.png");
-    cuadroN->setDevicePixelRatio(5);
+    QPixmap *cuadroN = tablero->getcuadroN();
 
     int cuadro=0;
     int suma=45;

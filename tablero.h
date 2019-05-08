@@ -17,23 +17,21 @@ public:
     }
 
     ~Tablero();
-
     int generar(int matriz);
-
     int getnumMatriz();
-
     Node* getNode(int f, int c);
-
     int imprimir();
+    QPixmap* getcuadroN();
+    QPixmap* getcuadroB();
 
 signals:
 
 private:
     int numMatriz;
-
     Node **matrizF;
-
     Node* nodo;
+    QPixmap *cuadroN;
+    QPixmap *cuadroB;
 
 
 public slots:
