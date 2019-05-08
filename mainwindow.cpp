@@ -26,9 +26,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Inicio_clicked()
 {
+    int zoneSize = 10;
+
+    //Imagenes
+    QPixmap* torre = new QPixmap(":/imagenes/torre2.png");
+    torre->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* flechaSencilla = new QPixmap(":/imagenes/flecha sencilla.png");
+    flechaSencilla->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* flechaFuego = new QPixmap(":/imagenes/flecha fuego-1.png");
+    flechaFuego->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* flechaExplosivo = new QPixmap(":/imagenes/flecha explosiva.png");
+    flechaExplosivo->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* cuadroB = new QPixmap(":/imagenes/cuadro-blanco (copy).png");
+    cuadroB->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* cuadroN = new QPixmap(":/imagenes/cuadro-negro (copy).png");
+    cuadroN->setDevicePixelRatio(0.5*zoneSize);
 
     //Crea el laberinto
-
     QGraphicsTextItem *titulo = new QGraphicsTextItem;
     titulo->setScale(3);
     titulo->setPos(300,10);
@@ -52,7 +66,7 @@ void MainWindow::on_Inicio_clicked()
 
     //Crea un tablero
     Tablero* tablero = new Tablero();
-    tablero->generar(10);
+    tablero->generar(zoneSize);
     tablero->imprimir();
     printf("\n");
 
@@ -63,14 +77,8 @@ void MainWindow::on_Inicio_clicked()
     //para mostrar los cuadros de la matriz en partida
     int num = tablero->getnumMatriz();
 
-    //Cuadro Blanco
-    QPixmap *cuadroB = tablero->getcuadroB();
-
-    //Cuadro Negro
-    QPixmap *cuadroN = tablero->getcuadroN();
-
     int cuadro=0;
-    int suma=45;
+    int suma=(450/zoneSize);
 
     //si ingresa un tablero de indice par
     if (num%2==0){
@@ -146,9 +154,7 @@ void MainWindow::on_Inicio_clicked()
 
         else if (tablero->getNode(f,c)->getTorre()->getEstado() == false) {
 
-            tablero->getNode(f,c)->getTorre()->setEstado(true);
-
-            QPixmap *torre = tablero->getNode(f,c)->getTorre()->getTorre();
+            tablero->getNode(f,c)->getTorre()->setEstado(true);          
 
             int x = tablero->getNode(f,c)->getX();
             int y = tablero->getNode(f,c)->getY();

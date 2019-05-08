@@ -3,13 +3,7 @@
 
 Tablero::Tablero(QObject *parent) : QObject(parent)
 {
-    //Cuadro Blanco
-    cuadroB = new QPixmap(":/imagenes/cuadro-blanco.png");
-    cuadroB->setDevicePixelRatio(5);
 
-    //Cuadro Negro
-    cuadroN = new QPixmap(":/imagenes/cuadro-negro.png");
-    cuadroN->setDevicePixelRatio(5);
 }
 
 int Tablero::generar(int matriz){
@@ -47,14 +41,6 @@ int Tablero::getnumMatriz(){
 
 Node* Tablero::getNode(int f, int c){
     return (*(matrizF+f)+c);
-}
-
-QPixmap* Tablero::getcuadroB(){
-    return cuadroB;
-}
-
-QPixmap* Tablero::getcuadroN(){
-    return cuadroN;
 }
 
 Tablero::~Tablero(){

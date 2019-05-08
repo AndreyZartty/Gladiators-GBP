@@ -8,5 +8,8 @@
         <file>imagenes/fondo.jpg</file>
         <file>imagenes/pp,550x550.u1.jpg</file>
         <file>imagenes/torre.png</file>
+        <file>imagenes/cuadro-blanco (copy).png</file>
+        <file>imagenes/cuadro-negro (copy).png</file>
+        <file>imagenes/torre2.png</file>
     </qresource>
 </RCC>
