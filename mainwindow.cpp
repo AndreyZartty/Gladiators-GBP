@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     partida = new QGraphicsScene(this);
+
+    nextG = new NextGen();
 }
 
 MainWindow::~MainWindow()
@@ -26,6 +28,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Inicio_clicked()
 {
+    hide();
+
     int zoneSize = 10;
 
     //Imagenes

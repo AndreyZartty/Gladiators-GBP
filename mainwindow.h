@@ -7,6 +7,8 @@
 #include <QGraphicsView>
 #include <stdio.h>
 
+#include "nextgen.h"
+
 #include "tablero.h"
 
 namespace Ui {
@@ -31,6 +33,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    NextGen* nextG;
+
 };
 
 #endif // MAINWINDOW_H

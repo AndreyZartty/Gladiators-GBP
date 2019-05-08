@@ -16,14 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     tablero.cpp \
     node.cpp \
-    torres.cpp
+    torres.cpp \
+    nextgen.cpp
 
 HEADERS  += mainwindow.h \
     tablero.h \
     node.h \
-    torres.h
+    torres.h \
+    nextgen.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    nextgen.ui
 
 RESOURCES += \
     imagenes.qrc
