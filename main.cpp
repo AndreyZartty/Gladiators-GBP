@@ -17,13 +17,14 @@ int main()
     //Gladiador *g5 = new Gladiador(1);
     Poblacion *poblacion = new Poblacion("Lannister");
     poblacion->getMejor();
+    poblacion->setPadres();
 
     //Poblacion *poblacion2 = new Poblacion("Stark");
     //poblacion2->getMejor();
 
 
-    poblacion->nuevageneracion();
-    poblacion->nuevageneracion();
+    //poblacion->nuevageneracion();
+    //poblacion->nuevageneracion();
     for (int i=0;i<poblacion->getGladiadores().getSize(); i++) {
         cout<<poblacion->getGladiadores().recorrer(i)->getNombre()<<endl;
     }
@@ -32,9 +33,9 @@ int main()
         cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
     }
 
-    Gladiador *g1 = new Gladiador(1);
-    Gladiador *g2 = new Gladiador(1);
-    Gladiador *g3 = new Gladiador(2, g1, g2);
+    //Gladiador *g1 = new Gladiador(1);
+    //Gladiador *g2 = new Gladiador(1);
+    //Gladiador *g3 = new Gladiador(2, g1, g2);
     //cout<<00000000000<<endl;
     //poblacion2->nuevageneracion();
     /**nuevo->setEdad(25);

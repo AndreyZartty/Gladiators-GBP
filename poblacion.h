@@ -13,6 +13,7 @@ public:
     void insertarGladiador(Gladiador* gladiador);
     List getGladiadores();
     List getPadres();
+    void setPadres();
     void setMejor();
     Gladiador* getMejor();
     string getNombrePoblacion();

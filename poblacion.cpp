@@ -53,6 +53,31 @@ List Poblacion::getPadres(){
     return padres;
 }
 
+void Poblacion::setPadres(){
+    List ltemp = gladiadores;
+    Gladiador *gtemp;
+    for (int i=8;i>0;i--) {
+        gtemp=ltemp.recorrer(0);
+        //int j=1;
+        int x;
+        //while (j<x){
+        for (int j=0;j<ltemp.getSize();j++) {
+            if(ltemp.recorrer(j)->getResistencia()>gtemp->getResistencia()){
+                gtemp=ltemp.recorrer(j);
+                x= j;
+        //    }else {
+          //      j++;
+            }
+
+        }
+        ltemp.sacar(x);
+        cout<<gtemp->getNombre()<<endl;
+    }
+    for (int h=0;h<ltemp.getSize();h++) {
+        cout<<"ltemp "<<ltemp.recorrer(h)->getNombre()<<endl;
+    }
+}
+
 string Poblacion::getNombrePoblacion(){
     return nombrePoblacion;
 }
@@ -75,7 +100,7 @@ Gladiador* Poblacion::getMejor(){
 
 void Poblacion::nuevageneracion(){
     setGeneracion(generacion++);
-
+    setPadres();
     Gladiador* temp;
     for (int i=0;i<gladiadores.getSize();i++) {
         if (gladiadores.recorrer(i)->getEdad()>=70){
