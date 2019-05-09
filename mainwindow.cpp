@@ -208,7 +208,7 @@ int MainWindow::sendJSON(string KEY, string data){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.6");
+        client.sin_addr.s_addr = inet_addr("172.20.10.5"); //172.20.10.4
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
