@@ -24,6 +24,7 @@ Poblacion::Poblacion(string _nombrePoblacion)
             }
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
+            insertarCopia(gladiador);
             cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
     }
     setMejor();
@@ -42,6 +43,11 @@ void Poblacion::setGeneracion(int Generacion)
 void Poblacion::insertarGladiador(Gladiador *gladiador)
 {
     gladiadores.insertLast(gladiador);
+}
+
+void Poblacion::insertarCopia(Gladiador *gladiador)
+{
+    copia.insertLast(gladiador);
 }
 
 List Poblacion::getGladiadores()
@@ -90,6 +96,7 @@ void Poblacion::setMejor(){
 
 Gladiador* Poblacion::getMejor(){
     cout<<"El mejor de la poblacion "<< nombrePoblacion <<" es: "<<mejor->getNombre()<<endl;
+    gladiadores.bubbleSort();
     return mejor;
 }
 
@@ -118,6 +125,7 @@ void Poblacion::nuevageneracion(){
             }
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
+            insertarCopia(gladiador);
             cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
     }
 
@@ -135,6 +143,7 @@ void Poblacion::nuevageneracion(){
             }
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
+            insertarCopia(gladiador);
             cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
     }
 

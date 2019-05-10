@@ -99,8 +99,8 @@ Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *padre2)
         string cromosomaFuerzaSup2 = decToBinary(padre2->getFuerzaSuperior()).substr(2,4);
         string cromosomaFuerzaInf1 = decToBinary(padre1->getFuerzaInferior()).substr(0,2);
         string cromosomaFuerzaInf2 = decToBinary(padre2->getFuerzaInferior()).substr(2,4);
-        cout<<padre1->getInteligencia()<<endl;
-        cout<<cromosomaInte1<<endl;
+        //cout<<padre1->getInteligencia()<<endl;
+        //cout<<cromosomaInte1<<endl;
         setInteligencia(binToDec(atoi((cromosomaInte1+cromosomaInte2).c_str())));
         setCondicionFisica(binToDec(atoi((cromosomaCond1+cromosomaCond2).c_str())));
         setFuerzaSuperior(binToDec(atoi((cromosomaFuerzaSup1+cromosomaFuerzaSup2).c_str())));

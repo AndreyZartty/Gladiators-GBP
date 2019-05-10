@@ -16,22 +16,23 @@ int main()
     //Gladiador *g4 = new Gladiador(1);
     //Gladiador *g5 = new Gladiador(1);
     Poblacion *poblacion = new Poblacion("Lannister");
-    //poblacion->getMejor();
+    poblacion->getMejor();
     //poblacion->setPadres();
 
     //Poblacion *poblacion2 = new Poblacion("Stark");
     //poblacion2->getMejor();
 
-
-    poblacion->nuevageneracion();
+    //poblacion->getGladiadores().bubbleSort();
     //poblacion->nuevageneracion();
+    //poblacion->nuevageneracion();
+    cout<<"POBLACION"<<endl;
     for (int i=0;i<poblacion->getGladiadores().getSize(); i++) {
-        cout<<poblacion->getGladiadores().recorrer(i)->getNombre()<<endl;
+        cout<<poblacion->getGladiadores().recorrer(i)->getNombre()<<poblacion->getGladiadores().recorrer(i)->getResistencia()<<endl;
     }
     cout<<"11111111111111111111111111111111"<<endl;
-    for (int i=0;i<poblacion->getPadres().getSize(); i++) {
-        cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
-    }
+    //for (int i=0;i<poblacion->getPadres().getSize(); i++) {
+        //cout<<poblacion->getPadres().recorrer(i)->getNombre()<<endl;
+    //}
 
     //Gladiador *g1 = new Gladiador(1);
     //Gladiador *g2 = new Gladiador(1);

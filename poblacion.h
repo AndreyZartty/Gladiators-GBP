@@ -11,7 +11,9 @@ public:
     int getGeneracion();
     void setGeneracion(int Generacion);
     void insertarGladiador(Gladiador* gladiador);
+    void insertarCopia(Gladiador* gladiador);
     List getGladiadores();
+    List getCopia();
     List getPadres();
     void setPadres();
     void setMejor();
@@ -23,6 +25,7 @@ public:
 private:
     string nombrePoblacion;
     List gladiadores;
+    List copia;
     List padres;
     int generacion=1;
     Gladiador* mejor;

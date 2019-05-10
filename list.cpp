@@ -80,6 +80,25 @@ void List::insertLast(Gladiador* gladiador) {
             current = current->get_nxtPtr();
         }
         current->set_nxtNd(aux);
-    }
+    }    
+}
 
+void List::swap(Gladiador *xp, Gladiador *yp)
+{
+    Gladiador temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+
+void List::bubbleSort()
+{
+    int n = getSize();
+    int i, j;
+    for (i = 0; i < n-1; i++){
+        for (j = 0; j < n-i-1; j++){
+            if (recorrer(j)->getResistencia() < recorrer(j+1)->getResistencia()){
+                swap(recorrer(j), recorrer(j+1));
+            }
+        }
+    }
 }

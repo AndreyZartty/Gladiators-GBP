@@ -17,6 +17,8 @@ public:
     void insertLast(Gladiador *gladiador);
     Gladiador* recorrer(int indice);
     Gladiador* sacar(int indice);
+    void swap(Gladiador *xp, Gladiador *yp);
+    void bubbleSort();
 private:
 
     Node* pointerHead= nullptr;
