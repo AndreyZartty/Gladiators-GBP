@@ -23,7 +23,7 @@ int main()
     //poblacion2->getMejor();
 
     //poblacion->getGladiadores().bubbleSort();
-    //poblacion->nuevageneracion();
+    poblacion->nuevageneracion();
     //poblacion->nuevageneracion();
     cout<<"POBLACION"<<endl;
     for (int i=0;i<poblacion->getGladiadores().getSize(); i++) {

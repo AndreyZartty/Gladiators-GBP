@@ -60,8 +60,14 @@ List Poblacion::getPadres(){
 }
 
 void Poblacion::setPadres(){
+    gladiadores.bubbleSort();
+    for (int i=8;i>0;i--) {
+        padres.insertFirst(gladiadores.recorrer(i));
+    }
+    /*
     List ltemp = gladiadores;
     Gladiador *gtemp;
+
     for (int i=8;i>0;i--) {
         gtemp=ltemp.recorrer(0);
         int x;
@@ -74,9 +80,11 @@ void Poblacion::setPadres(){
         //ltemp.sacar(x);
         padres.insertLast(ltemp.sacar(x));
     }
-    for (int h=0;h<ltemp.getSize();h++) {
-        cout<<"ltemp "<<ltemp.recorrer(h)->getNombre()<<endl;
+    */
+    for (int h=0;h<padres.getSize();h++) {
+        cout<<"ltemp "<<padres.recorrer(h)->getNombre()<<endl;
     }
+
 }
 
 string Poblacion::getNombrePoblacion(){
