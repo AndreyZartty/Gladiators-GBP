@@ -11,5 +11,9 @@
         <file>imagenes/cuadro-blanco (copy).png</file>
         <file>imagenes/cuadro-negro (copy).png</file>
         <file>imagenes/torre2.png</file>
+        <file>imagenes/G1A.png</file>
+        <file>imagenes/G1B.png</file>
+        <file>imagenes/G2A.png</file>
+        <file>imagenes/G2B.png</file>
     </qresource>
 </RCC>

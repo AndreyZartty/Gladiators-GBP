@@ -67,6 +67,11 @@ private:
     int xTorreActual;
     int yTorreActual;
 
+    int xActG1;
+    int yActG1;
+    int xActG2;
+    int yActG2;
+
 };
 
 #endif // MAINWINDOW_H

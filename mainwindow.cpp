@@ -194,24 +194,63 @@ void MainWindow::DibujarTablero(){
 
 void MainWindow::graficarGladiador() {
 
+    //Imagenes del gladiador 1
+    QPixmap* G1A = new QPixmap(":/imagenes/G1A.png");
+    G1A->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* G1B = new QPixmap(":/imagenes/G1B.png");
+    G1B->setDevicePixelRatio(0.5*zoneSize);
+
+    //Imagenes del gladiador 2
+    QPixmap* G2A = new QPixmap(":/imagenes/G2A.png");
+    G2A->setDevicePixelRatio(0.5*zoneSize);
+    QPixmap* G2B = new QPixmap(":/imagenes/G2B.png");
+    G2B->setDevicePixelRatio(0.5*zoneSize);
+
     bool move = true;
 
     ///Cuando hay que cambiar las torres de posicion
     if (turn % 3 == 0) {
 
 
-
     } else {
 
-        while (move) {
+        //Para graficar los gladiadores
+        bool t = false;
+        int i = 0;
 
-            int y;
+        while(t==false){
 
-            ///Obtener x y y de los gladiadores
-            ///
-            /// .sleep()
+            QString I;
+            I.setNum(i);
 
+            //Gladiador 1
+            sendJSON("XCOORDGP1", I.toStdString());
+            sendJSON("YCOORDGP1", I.toStdString());
+
+            //Gladiador 2
+            sendJSON("XCOORDGP2", I.toStdString());
+            sendJSON("YCOORDGP2", I.toStdString());
+
+            if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
+                t=true;
+                break;
+            }
+
+            if (xActG1!=-1 && yActG1!=-1){
+
+                partida->addPixmap(*G1A)->moveBy(xActG1,yActG1);
+
+            }
+
+            if (xActG2!=-1 && yActG2!=-1){
+
+                partida->addPixmap(*G2A)->moveBy(xActG2,yActG2);
+
+            }
+
+            i++;
         }
+
 
     }
 }
@@ -308,6 +347,35 @@ int MainWindow::sendJSON(string KEY, string data){
         yTorreActual = json_object_get_int(yTorre);
     }
 
+    //Gladiador 1
+    struct json_object *xG1;
+    json_object *parsed_jsonxG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonxG1, "XCOORDGP1", &xG1);
+    if (json_object_get_int(xG1) != 0){
+        xActG1 = json_object_get_int(xG1);
+    }
+
+    struct json_object *yG1;
+    json_object *parsed_jsonyG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonyG1, "YCOORDGP1", &yG1);
+    if (json_object_get_int(yG1) != 0){
+        yActG1 = json_object_get_int(yG1);
+    }
+
+    //Gladiador 2
+    struct json_object *xG2;
+    json_object *parsed_jsonxG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonxG2, "XCOORDGP2", &xG2);
+    if (json_object_get_int(xG2) != 0){
+        xActG2 = json_object_get_int(xG2);
+    }
+
+    struct json_object *yG2;
+    json_object *parsed_jsonyG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonyG2, "YCOORDGP2", &yG2);
+    if (json_object_get_int(yG1) != 0){
+        yActG2 = json_object_get_int(yG2);
+    }
 
     /*if (json_object_get_string(tempCodigo) != 0 && json_object_get_string(tempErrorCodigo) == 0) {
 
