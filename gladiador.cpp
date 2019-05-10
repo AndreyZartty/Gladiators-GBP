@@ -16,6 +16,7 @@
 #include <json-c/json.h>
 #include <json-c/debug.h>
 #include <json-c/json_object.h>
+#include <list.h>
 
 #define PORT 3550
 #define MAXDATASIZE 1000
@@ -40,7 +41,7 @@ int binToDec(int binario)
 {
     int exp,digito;
     int decimal;
-    cout << "Binario: "<< binario<<endl;
+    //cout << "Binario: "<< binario<<endl;
 
     exp=0;
     decimal=0;
@@ -53,7 +54,7 @@ int binToDec(int binario)
         binario=(int)(binario/10);
     }
     decimal=decimal + binario * pow(2,exp);
-    cout << endl << "Decimal: " << decimal << endl;
+    //cout << endl << "Decimal: " << decimal << endl;
     return decimal;
 }
 
@@ -85,8 +86,29 @@ Gladiador::Gladiador(int generacion)
         cout << "Introduzca los padres si no es la primera generacion" << endl;
     }
 }
+
+void Gladiador::mutacion(string *gen){
+    cout<<"mutacion de gen: "<<*gen;
+    int random = rand() % 2;
+    if (random==1){
+        if(gen->substr(0,1)=="1"){
+            *gen="0"+gen->substr(1,2);
+        }else {
+            *gen="1"+gen->substr(1,2);
+        }
+    }else {
+        if(gen->substr(1,2)=="1"){
+            *gen=gen->substr(0,1)+"0";
+        }else {
+            *gen=gen->substr(0,1)+"1";
+        }
+    }
+    cout<<" a: "<<*gen<<endl;
+}
+
 Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *padre2)
 {
+    int random1 = 1 + rand() % (100-1);
     if (generacion == 1){
         cout << "No introduzca padres, ya que no es de la primera generacion" << endl;
     }
@@ -99,8 +121,13 @@ Gladiador::Gladiador(int generacion, Gladiador *padre1, Gladiador *padre2)
         string cromosomaFuerzaSup2 = decToBinary(padre2->getFuerzaSuperior()).substr(2,4);
         string cromosomaFuerzaInf1 = decToBinary(padre1->getFuerzaInferior()).substr(0,2);
         string cromosomaFuerzaInf2 = decToBinary(padre2->getFuerzaInferior()).substr(2,4);
+        string *arr[]={&cromosomaInte1,&cromosomaInte2,&cromosomaCond1,&cromosomaCond2,&cromosomaFuerzaSup1,&cromosomaFuerzaSup2,&cromosomaFuerzaInf1,&cromosomaFuerzaInf2};
         //cout<<padre1->getInteligencia()<<endl;
         //cout<<cromosomaInte1<<endl;
+        if (random1<=5){
+            int random2 = 0 + rand() % (7-0);
+            mutacion(arr[random2]);
+        }
         setInteligencia(binToDec(atoi((cromosomaInte1+cromosomaInte2).c_str())));
         setCondicionFisica(binToDec(atoi((cromosomaCond1+cromosomaCond2).c_str())));
         setFuerzaSuperior(binToDec(atoi((cromosomaFuerzaSup1+cromosomaFuerzaSup2).c_str())));
@@ -158,26 +185,27 @@ void Gladiador::setResistencia()
     int resist=0;
     if(70<=edad){
         muerto=true;
-        resist += 10;
     }
 
-    else if(25 <= edad && edad <= 45){
-        resist += 20;
+    else {
+        if(25 <= edad && edad <= 45){
+            resist += 20;
+        }
+        else if (25 > edad){
+            resist += 15;
+        }
+        else if (45 < edad){
+            resist += 10;
+        }
+        resist += 2*inteligencia;
+        resist += 2*condicionFisica;
+        resist += 2*fuerzaInferior;
+        resist += 2*fuerzaSuperior;
     }
-    else if (25 > edad){
-        resist += 15;
-    }
-    else if (45 < edad){
-        resist += 10;
-    }
-    resist += 2*inteligencia;
-    resist += 2*condicionFisica;
-    resist += 2*fuerzaInferior;
-    resist += 2*fuerzaSuperior;
 
     resistencia = resist;
-    cout <<"resistencia de " << nombre << ": " <<resistencia << endl;
-    cout <<"edad: "<< edad << endl;
+    //cout <<"resistencia de " << nombre << ": " <<resistencia << endl;
+    //cout <<"edad: "<< edad << endl;
 }
 
 void Gladiador::morir(){

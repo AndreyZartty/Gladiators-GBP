@@ -32,6 +32,7 @@ public:
     int getResistencia();
     string getNombre();
     bool getMuerto();
+    void mutacion(string *gen);
 
 private:
     string nombre;

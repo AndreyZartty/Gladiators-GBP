@@ -19,6 +19,7 @@ public:
     Gladiador* sacar(int indice);
     void swap(Gladiador *xp, Gladiador *yp);
     void bubbleSort();
+    void vaciar();
 private:
 
     Node* pointerHead= nullptr;

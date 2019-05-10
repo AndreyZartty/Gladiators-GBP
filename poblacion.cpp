@@ -25,7 +25,7 @@ Poblacion::Poblacion(string _nombrePoblacion)
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
             insertarCopia(gladiador);
-            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<" resistencia: "<<gladiador->getResistencia()<<endl;
     }
     setMejor();
 }
@@ -60,6 +60,9 @@ List Poblacion::getPadres(){
 }
 
 void Poblacion::setPadres(){
+    //padres.getPointerHead()->set_nxtNd(nullptr);
+    //padres.setPointerHead(nullptr);
+    padres.vaciar();
     gladiadores.bubbleSort();
     for (int i=8;i>0;i--) {
         padres.insertFirst(gladiadores.recorrer(i));
@@ -114,6 +117,16 @@ void Poblacion::nuevageneracion(){
     //cout<<generacion<<endl;
     setPadres();
 
+    Gladiador* temp;
+    for (int i=0;i<gladiadores.getSize();i++) {
+        if (gladiadores.recorrer(i)->getEdad()>=70 || gladiadores.recorrer(i)->getMuerto()){
+
+        }else {
+            temp = gladiadores.recorrer(i);
+            temp->setEdad(temp->getEdad()+15);
+            temp->setResistencia();
+        }
+    }
 
     char vocales [] = {"aeiou"};
     char consonantes [] = {"bcdfghjlmnprstv"};
@@ -134,7 +147,7 @@ void Poblacion::nuevageneracion(){
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
             insertarCopia(gladiador);
-            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<" resistencia: "<<gladiador->getResistencia()<<endl;
     }
 
     for (int i=0; i <8; i+=2){
@@ -152,17 +165,7 @@ void Poblacion::nuevageneracion(){
             gladiador->setNombre(nombre);
             insertarGladiador(gladiador);
             insertarCopia(gladiador);
-            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<endl;
+            cout<< "Se ha creado el gladiador: "<< gladiador->getNombre() <<" gen: "<<getGeneracion()<<" resistencia: "<<gladiador->getResistencia()<<endl;
     }
-
-    Gladiador* temp;
-    for (int i=0;i<gladiadores.getSize();i++) {
-        if (gladiadores.recorrer(i)->getEdad()>=70 || gladiadores.recorrer(i)->getMuerto()){
-
-        }else {
-            temp = gladiadores.recorrer(i);
-            temp->setEdad(temp->getEdad()+15);
-            temp->setResistencia();
-        }
-    }
+    gladiadores.bubbleSort();
 }
