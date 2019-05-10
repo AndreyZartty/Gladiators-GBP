@@ -28,6 +28,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_Inicio_clicked()
 {
+    ///Turno actual -> iteracion
+    turn = 1;
 
     sendJSON("COMENZAR", "Comenzar");
 
@@ -75,6 +77,7 @@ void MainWindow::on_Inicio_clicked()
 
     DibujarTablero();
     DibujarTorres();
+
 
     SLOT(close());
 }
@@ -187,6 +190,33 @@ void MainWindow::DibujarTablero(){
 }
 
 
+
+
+void MainWindow::graficarGladiador() {
+
+    bool move = true;
+
+    ///Cuando hay que cambiar las torres de posicion
+    if (turn % 3 == 0) {
+
+
+
+    } else {
+
+        while (move) {
+
+            int y;
+
+            ///Obtener x y y de los gladiadores
+            ///
+            /// .sleep()
+
+        }
+
+    }
+}
+
+
 int MainWindow::sendJSON(string KEY, string data){
     char* str;
     int fd, numbytes;
@@ -294,4 +324,5 @@ int MainWindow::sendJSON(string KEY, string data){
     memset(sendBuff, 0, MAXDATASIZE);
 
     ::close(fd);
+
 }

@@ -48,6 +48,7 @@ public:
     int sendJSON(string KEY, string data);
     void DibujarTablero();
     void DibujarTorres();
+    void graficarGladiador();
 
 
 private slots:
@@ -59,6 +60,7 @@ private:
     NextGen* nextG;
 
     int zoneSize;
+    int turn;
 
     int xNodeActual;
     int yNodeActual;
