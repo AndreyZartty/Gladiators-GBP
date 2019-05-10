@@ -77,6 +77,7 @@ void MainWindow::on_Inicio_clicked()
 
     DibujarTablero();
     DibujarTorres();
+    graficarGladiador();
 
 
     SLOT(close());
@@ -277,7 +278,7 @@ int MainWindow::sendJSON(string KEY, string data){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("172.20.10.5"); //172.20.10.4
+        client.sin_addr.s_addr = inet_addr("192.168.100.6"); //192.168.100.6
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -373,7 +374,7 @@ int MainWindow::sendJSON(string KEY, string data){
     struct json_object *yG2;
     json_object *parsed_jsonyG2 = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonyG2, "YCOORDGP2", &yG2);
-    if (json_object_get_int(yG1) != 0){
+    if (json_object_get_int(yG2) != 0){
         yActG2 = json_object_get_int(yG2);
     }
 
