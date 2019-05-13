@@ -28,6 +28,9 @@
 #define PORT 3550
 #define MAXDATASIZE 1000
 
+class Thread;
+class QTimer;
+
 using namespace std;
 
 namespace Ui {
@@ -49,10 +52,11 @@ public:
     void DibujarTablero();
     void DibujarTorres();
     void graficarGladiador();
-
+    void tirarFlechas();
 
 private slots:
     void on_Inicio_clicked();
+    void grafGlad();
 
 private:
     Ui::MainWindow *ui;
@@ -71,6 +75,25 @@ private:
     int yActG1;
     int xActG2;
     int yActG2;
+
+    //variables para graficar un gladiador
+    bool t;
+    int iGlad;
+    int turnoImgGlad1;
+    int turnoImgGlad2;
+
+    Thread *bThread;
+
+    QTimer *timer;
+
+    //imagenes
+    QPixmap* G1A;
+    QPixmap* G1B;
+    QPixmap* G2A;
+    QPixmap* G2B;
+    QPixmap* flechasSencillas;
+    QPixmap* flechasFuego;
+    QPixmap* flechasExplosivo;
 
 };
 

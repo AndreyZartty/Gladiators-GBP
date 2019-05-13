@@ -5,6 +5,13 @@
 #include <QGraphicsItem>
 #include <stdio.h>
 #include <iostream>
+#include <unistd.h>
+#include <chrono>
+#include <thread>
+#include <QDateTime>
+#include <QTimer>
+
+#include "thread.h"
 
 using namespace std;
 
@@ -75,9 +82,12 @@ void MainWindow::on_Inicio_clicked()
     partida->addPixmap(QPixmap(":/imagenes/fondo.jpg"));
     partida->addItem(titulo);
 
-    DibujarTablero();
-    DibujarTorres();
+    //DibujarTablero();
+    //DibujarTorres();
+
+    //Para Graficar los gladiadores
     graficarGladiador();
+
 
 
     SLOT(close());
@@ -191,20 +201,29 @@ void MainWindow::DibujarTablero(){
 }
 
 
+void MainWindow::tirarFlechas(){
+
+    flechasSencillas = new QPixmap(":/imagenes/flecha sencilla.png");
+    flechasFuego = new QPixmap(":/imagenes/flecha fuego-1.png");
+    flechasExplosivo = new QPixmap(":/imagenes/flecha explosiva.png");
+
+
+
+}
 
 
 void MainWindow::graficarGladiador() {
 
     //Imagenes del gladiador 1
-    QPixmap* G1A = new QPixmap(":/imagenes/G1A.png");
+    G1A = new QPixmap(":/imagenes/G1A.png");
     G1A->setDevicePixelRatio(0.5*zoneSize);
-    QPixmap* G1B = new QPixmap(":/imagenes/G1B.png");
+    G1B = new QPixmap(":/imagenes/G1B.png");
     G1B->setDevicePixelRatio(0.5*zoneSize);
 
     //Imagenes del gladiador 2
-    QPixmap* G2A = new QPixmap(":/imagenes/G2A.png");
+    G2A = new QPixmap(":/imagenes/G2A.png");
     G2A->setDevicePixelRatio(0.5*zoneSize);
-    QPixmap* G2B = new QPixmap(":/imagenes/G2B.png");
+    G2B = new QPixmap(":/imagenes/G2B.png");
     G2B->setDevicePixelRatio(0.5*zoneSize);
 
     bool move = true;
@@ -215,45 +234,85 @@ void MainWindow::graficarGladiador() {
 
     } else {
 
+
         //Para graficar los gladiadores
-        bool t = false;
-        int i = 0;
+        t = false;
+        iGlad = 0;
+        turnoImgGlad1=0;
+        turnoImgGlad2=0;
 
-        while(t==false){
+        //Para Graficar los gladiadores
+        timer = new QTimer(this);
 
-            QString I;
-            I.setNum(i);
+        //while(t==false){
+            connect(timer,SIGNAL(timeout()), this, SLOT(grafGlad()));
+            timer->start(1000);
+        //}
+    }
 
-            //Gladiador 1
-            sendJSON("XCOORDGP1", I.toStdString());
-            sendJSON("YCOORDGP1", I.toStdString());
+}
 
-            //Gladiador 2
-            sendJSON("XCOORDGP2", I.toStdString());
-            sendJSON("YCOORDGP2", I.toStdString());
+void MainWindow::grafGlad(){
 
-            if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
-                t=true;
-                break;
-            }
+    DibujarTablero();
+    DibujarTorres();
 
-            if (xActG1!=-1 && yActG1!=-1){
+    QString I;
+    I.setNum(iGlad);
 
-                partida->addPixmap(*G1A)->moveBy(xActG1,yActG1);
+    //Gladiador 1
+    sendJSON("XCOORDGP1", I.toStdString());
+    sendJSON("YCOORDGP1", I.toStdString());
 
-            }
+    //Gladiador 2
+    sendJSON("XCOORDGP2", I.toStdString());
+    sendJSON("YCOORDGP2", I.toStdString());
 
-            if (xActG2!=-1 && yActG2!=-1){
+    //Hay que quitar este if porque lo estoy obligando
+    if (iGlad==0){
+        xActG2=xActG1;
+        yActG2=yActG1;
+    }
 
-                partida->addPixmap(*G2A)->moveBy(xActG2,yActG2);
+    if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
+        t=true;
+        cout<<"Final del thread"<<endl;
+        timer->stop();
+    }
 
-            }
+    if (xActG1!=-1 && yActG1!=-1){
 
-            i++;
+        if (turnoImgGlad1 == 0){
+            partida->addPixmap(*G1A)->moveBy(xActG1,yActG1);
+            turnoImgGlad1=1;
+        }
+        else{
+            partida->addPixmap(*G1B)->moveBy(xActG1,yActG1);
+            turnoImgGlad1=0;
         }
 
+        cout<<xActG1<<","<<yActG1<<endl;
+        cout<<(iGlad)<<endl;
 
     }
+
+    if (xActG2!=-1 && yActG2!=-1){
+
+        if (turnoImgGlad2 == 0){
+            partida->addPixmap(*G2A)->moveBy(xActG2,yActG2);
+            turnoImgGlad2=1;
+        }
+        else{
+            partida->addPixmap(*G2B)->moveBy(xActG2,yActG2);
+            turnoImgGlad2=0;
+        }
+        cout<<xActG2<<","<<yActG2<<endl;
+        cout<<(iGlad)<<endl;
+
+    }
+
+    iGlad++;
+
 }
 
 
@@ -278,7 +337,7 @@ int MainWindow::sendJSON(string KEY, string data){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.6"); //192.168.100.6
+        client.sin_addr.s_addr = inet_addr("10.0.2.15"); //192.168.100.6
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
