@@ -76,6 +76,9 @@ private:
     int xActG2;
     int yActG2;
 
+    int lifeG2;
+    int lifeG1;
+
     //variables para graficar un gladiador
     bool t;
     int iGlad;

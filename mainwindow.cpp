@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QTimer>
 #include <QMatrix>
+#include <QTransform>
 
 #include "thread.h"
 
@@ -223,8 +224,8 @@ void MainWindow::tirarFlechas(){
         //Gladiador 1
         //Verifica si esta a la derecha
         if (torres[j][1] == (xActG1+(450/zoneSize)) && torres[j][2] == yActG1 ){
-            QMatrix rot;
-            rot.rotate(180);
+            QTransform trans;
+            QTransform rot = trans.rotate(180);
             flechasSencillas->transformed(rot);
             partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
         }
@@ -236,16 +237,16 @@ void MainWindow::tirarFlechas(){
 
         //Verifica si esta a Arriba
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1-(450/zoneSize))){
-            QMatrix rot;
-            rot.rotate(270);
+            QTransform trans;
+            QTransform rot = trans.rotate(270);
             flechasSencillas->transformed(rot);
             partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
         }
 
         //Verifica si esta a Abajo
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1+(450/zoneSize))){
-            QMatrix rot;
-            rot.rotate(90);
+            QTransform trans;
+            QTransform rot = trans.rotate(90);
             flechasExplosivo->transformed(rot);
             partida->addPixmap(*flechasExplosivo)->moveBy(xActG1,yActG1);
         }
@@ -320,7 +321,7 @@ void MainWindow::graficarGladiador() {
 
         //while(t==false){
             connect(timer,SIGNAL(timeout()), this, SLOT(grafGlad()));
-            timer->start(2000);
+            timer->start(1000);
         //}
     }
 
@@ -353,6 +354,7 @@ void MainWindow::grafGlad(){
     if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
         t=true;
         cout<<"Final del thread"<<endl;
+        QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
         timer->stop();
     }
 
@@ -497,6 +499,8 @@ int MainWindow::sendJSON(string KEY, string data){
     if (json_object_get_int(yG1) != 0){
         yActG1 = json_object_get_int(yG1);
     }
+
+
 
     //Gladiador 2
     struct json_object *xG2;
