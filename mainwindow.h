@@ -95,6 +95,10 @@ private:
     QPixmap* flechasFuego;
     QPixmap* flechasExplosivo;
 
+    //Tirar flechas
+    int torres[20][3];
+    int iTorre;
+
 };
 
 #endif // MAINWINDOW_H

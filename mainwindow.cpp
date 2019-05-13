@@ -10,6 +10,7 @@
 #include <thread>
 #include <QDateTime>
 #include <QTimer>
+#include <QMatrix>
 
 #include "thread.h"
 
@@ -72,18 +73,19 @@ void MainWindow::on_Inicio_clicked()
     int xInicial=pixX;
     int yInicial=pixY;
 
-    //Crea un tablero
-    Tablero* tablero = new Tablero();
-    tablero->generar(zoneSize);
-    tablero->imprimir();
-    printf("\n");
-
     //Agrega todos los elementos a la partida
     partida->addPixmap(QPixmap(":/imagenes/fondo.jpg"));
     partida->addItem(titulo);
 
     //DibujarTablero();
     //DibujarTorres();
+
+    //Rellena el array de las torres
+    for(int j=0; j<20; j++){
+        for (int i=0;i<3;i++){
+            torres[j][i]=0;
+        }
+    }
 
     //Para Graficar los gladiadores
     graficarGladiador();
@@ -115,6 +117,12 @@ void MainWindow::DibujarTorres(){
         if (yTorreActual==-1 || xTorreActual==-1){
             t=true;
             break;
+        }
+
+        if (i<20){
+            torres[i][0]=i;
+            torres[i][1]=xTorreActual;
+            torres[i][2]=yTorreActual;
         }
 
         partida->addPixmap(*torre)->moveBy(xTorreActual,yTorreActual);
@@ -204,9 +212,75 @@ void MainWindow::DibujarTablero(){
 void MainWindow::tirarFlechas(){
 
     flechasSencillas = new QPixmap(":/imagenes/flecha sencilla.png");
+    flechasSencillas->setDevicePixelRatio(0.5*zoneSize);
     flechasFuego = new QPixmap(":/imagenes/flecha fuego-1.png");
+    flechasFuego->setDevicePixelRatio(0.5*zoneSize);
     flechasExplosivo = new QPixmap(":/imagenes/flecha explosiva.png");
+    flechasExplosivo->setDevicePixelRatio(0.5*zoneSize);
 
+    for(int j=0;j<20;j++){
+
+        //Gladiador 1
+        //Verifica si esta a la derecha
+        if (torres[j][1] == (xActG1+(450/zoneSize)) && torres[j][2] == yActG1 ){
+            QMatrix rot;
+            rot.rotate(180);
+            flechasSencillas->transformed(rot);
+            partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
+        }
+
+        //Verifica si esta a la izquierda
+        if (torres[j][1] == (xActG1-(450/zoneSize)) && torres[j][2] == yActG1 ){
+            partida->addPixmap(*flechasFuego)->moveBy(xActG1,yActG1);
+        }
+
+        //Verifica si esta a Arriba
+        if (torres[j][1] == xActG1 && torres[j][2] == (yActG1-(450/zoneSize))){
+            QMatrix rot;
+            rot.rotate(270);
+            flechasSencillas->transformed(rot);
+            partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
+        }
+
+        //Verifica si esta a Abajo
+        if (torres[j][1] == xActG1 && torres[j][2] == (yActG1+(450/zoneSize))){
+            QMatrix rot;
+            rot.rotate(90);
+            flechasExplosivo->transformed(rot);
+            partida->addPixmap(*flechasExplosivo)->moveBy(xActG1,yActG1);
+        }
+
+
+        //Gladiador 2
+        //Verifica si esta a la derecha
+        if (torres[j][1] == (xActG2+(450/zoneSize)) && torres[j][2] == yActG2 ){
+            QMatrix rot;
+            rot.rotate(180);
+            flechasSencillas->transformed(rot);
+            partida->addPixmap(*flechasSencillas)->moveBy(xActG2,yActG2);
+        }
+
+        //Verifica si esta a la izquierda
+        if (torres[j][1] == (xActG2-(450/zoneSize)) && torres[j][2] == yActG2 ){
+            partida->addPixmap(*flechasFuego)->moveBy(xActG2,yActG2);
+        }
+
+        //Verifica si esta a Arriba
+        if (torres[j][1] == xActG2 && torres[j][2] == (yActG2-(450/zoneSize))){
+            QMatrix rot;
+            rot.rotate(270);
+            flechasSencillas->transformed(rot);
+            partida->addPixmap(*flechasSencillas)->moveBy(xActG2,yActG2);
+        }
+
+        //Verifica si esta a Abajo
+        if (torres[j][1] == xActG2 && torres[j][2] == (yActG2+(450/zoneSize))){
+            QMatrix rot;
+            rot.rotate(90);
+            flechasExplosivo->transformed(rot);
+            partida->addPixmap(*flechasExplosivo)->moveBy(xActG2,yActG2);
+        }
+    }
 
 
 }
@@ -246,7 +320,7 @@ void MainWindow::graficarGladiador() {
 
         //while(t==false){
             connect(timer,SIGNAL(timeout()), this, SLOT(grafGlad()));
-            timer->start(1000);
+            timer->start(2000);
         //}
     }
 
@@ -268,11 +342,13 @@ void MainWindow::grafGlad(){
     sendJSON("XCOORDGP2", I.toStdString());
     sendJSON("YCOORDGP2", I.toStdString());
 
+    tirarFlechas();
+
     //Hay que quitar este if porque lo estoy obligando
-    if (iGlad==0){
+    /*if (iGlad==0){
         xActG2=xActG1;
         yActG2=yActG1;
-    }
+    }*/
 
     if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
         t=true;
