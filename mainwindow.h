@@ -76,8 +76,8 @@ private:
     int xActG2;
     int yActG2;
 
-    int lifeG2;
-    int lifeG1;
+    bool lifeG2;
+    bool lifeG1;
 
     //variables para graficar un gladiador
     bool t;
@@ -94,9 +94,7 @@ private:
     QPixmap* G1B;
     QPixmap* G2A;
     QPixmap* G2B;
-    QPixmap* flechasSencillas;
-    QPixmap* flechasFuego;
-    QPixmap* flechasExplosivo;
+    QPixmap* ImgFlecha;
 
     //Tirar flechas
     int torres[20][3];

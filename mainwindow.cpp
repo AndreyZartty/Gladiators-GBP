@@ -105,7 +105,7 @@ void MainWindow::DibujarTorres(){
 
     //Para generar torres aleatorias
     bool t = false;
-    int i = 0;
+    int i = 1;
 
     while(t==false){
 
@@ -120,10 +120,13 @@ void MainWindow::DibujarTorres(){
             break;
         }
 
-        if (i<20){
+        if (i<=3){
             torres[i][0]=i;
             torres[i][1]=xTorreActual;
             torres[i][2]=yTorreActual;
+            if (i==3){
+                i=1;
+            }
         }
 
         partida->addPixmap(*torre)->moveBy(xTorreActual,yTorreActual);
@@ -212,78 +215,77 @@ void MainWindow::DibujarTablero(){
 
 void MainWindow::tirarFlechas(){
 
-    flechasSencillas = new QPixmap(":/imagenes/flecha sencilla.png");
-    flechasSencillas->setDevicePixelRatio(0.5*zoneSize);
-    flechasFuego = new QPixmap(":/imagenes/flecha fuego-1.png");
-    flechasFuego->setDevicePixelRatio(0.5*zoneSize);
-    flechasExplosivo = new QPixmap(":/imagenes/flecha explosiva.png");
-    flechasExplosivo->setDevicePixelRatio(0.5*zoneSize);
-
     for(int j=0;j<20;j++){
+
+        QString I;
+        I.setNum(torres[j][0]);
+
+        if (torres[j][0]==1){
+            ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
+            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+        }
+
+        if (torres[j][0]==2){
+            ImgFlecha = new QPixmap(":/imagenes/flecha fuego-1.png");
+            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+        }
+
+        if (torres[j][0]==3){
+            ImgFlecha = new QPixmap(":/imagenes/flecha explosiva.png");
+            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+        }
 
         //Gladiador 1
         //Verifica si esta a la derecha
         if (torres[j][1] == (xActG1+(450/zoneSize)) && torres[j][2] == yActG1 ){
-            QTransform trans;
-            QTransform rot = trans.rotate(180);
-            flechasSencillas->transformed(rot);
-            partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
+            sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a la izquierda
         if (torres[j][1] == (xActG1-(450/zoneSize)) && torres[j][2] == yActG1 ){
-            partida->addPixmap(*flechasFuego)->moveBy(xActG1,yActG1);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
+            sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a Arriba
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1-(450/zoneSize))){
-            QTransform trans;
-            QTransform rot = trans.rotate(270);
-            flechasSencillas->transformed(rot);
-            partida->addPixmap(*flechasSencillas)->moveBy(xActG1,yActG1);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
+            sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a Abajo
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1+(450/zoneSize))){
-            QTransform trans;
-            QTransform rot = trans.rotate(90);
-            flechasExplosivo->transformed(rot);
-            partida->addPixmap(*flechasExplosivo)->moveBy(xActG1,yActG1);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
+            sendJSON("LIFEG1", I.toStdString());
         }
 
 
         //Gladiador 2
         //Verifica si esta a la derecha
         if (torres[j][1] == (xActG2+(450/zoneSize)) && torres[j][2] == yActG2 ){
-            QMatrix rot;
-            rot.rotate(180);
-            flechasSencillas->transformed(rot);
-            partida->addPixmap(*flechasSencillas)->moveBy(xActG2,yActG2);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
+            sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a la izquierda
         if (torres[j][1] == (xActG2-(450/zoneSize)) && torres[j][2] == yActG2 ){
-            partida->addPixmap(*flechasFuego)->moveBy(xActG2,yActG2);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
+            sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a Arriba
         if (torres[j][1] == xActG2 && torres[j][2] == (yActG2-(450/zoneSize))){
-            QMatrix rot;
-            rot.rotate(270);
-            flechasSencillas->transformed(rot);
-            partida->addPixmap(*flechasSencillas)->moveBy(xActG2,yActG2);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
+            sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a Abajo
         if (torres[j][1] == xActG2 && torres[j][2] == (yActG2+(450/zoneSize))){
-            QMatrix rot;
-            rot.rotate(90);
-            flechasExplosivo->transformed(rot);
-            partida->addPixmap(*flechasExplosivo)->moveBy(xActG2,yActG2);
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
+            sendJSON("LIFEG2", I.toStdString());
         }
     }
-
-
 }
 
 
@@ -308,8 +310,6 @@ void MainWindow::graficarGladiador() {
 
 
     } else {
-
-
         //Para graficar los gladiadores
         t = false;
         iGlad = 0;
@@ -356,6 +356,18 @@ void MainWindow::grafGlad(){
         cout<<"Final del thread"<<endl;
         QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
         timer->stop();
+    }
+
+    if (lifeG1==false && lifeG2==true){
+        QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiador 1 Y 2 Muertos"));
+    }
+
+    if (lifeG1==false && lifeG2==true){
+        QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 1 Muerto, Gladiador 2 Vivo"));
+    }
+
+    if (lifeG2==false && lifeG1==true){
+        QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 2 Muerto, Gladiador 1 Vivo"));
     }
 
     if (xActG1!=-1 && yActG1!=-1){
@@ -500,6 +512,13 @@ int MainWindow::sendJSON(string KEY, string data){
         yActG1 = json_object_get_int(yG1);
     }
 
+    struct json_object *LifeG1;
+    json_object *parsed_jsonLifeG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonLifeG1, "LIFEG1", &LifeG1);
+    if (json_object_get_boolean(LifeG1) != 0){
+        lifeG1 = json_object_get_boolean(LifeG1);
+    }
+
 
 
     //Gladiador 2
@@ -517,15 +536,12 @@ int MainWindow::sendJSON(string KEY, string data){
         yActG2 = json_object_get_int(yG2);
     }
 
-    /*if (json_object_get_string(tempCodigo) != 0 && json_object_get_string(tempErrorCodigo) == 0) {
-
-    } else {
-        cout << json_object_get_string(tempErrorCodigo) << endl;
-        QMessageBox::information(this, tr("Error"), tr("Máxima cantidad de juegos activos alcanzada, intente ingresar luego."));
-        close();
-        return 0;
-
-    }*/
+    struct json_object *LifeG2;
+    json_object *parsed_jsonLifeG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonLifeG2, "LIFEG2", &LifeG2);
+    if (json_object_get_boolean(LifeG2) != 0){
+        lifeG2 = json_object_get_boolean(LifeG2);
+    }
 
     ///Se limpian los Buffers
     memset(recvBuff, 0, MAXDATASIZE);
