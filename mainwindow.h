@@ -56,7 +56,7 @@ public:
 
 private slots:
     void on_Inicio_clicked();
-    void grafGlad();
+    void AuxGraficarGladiador();
 
 private:
     Ui::MainWindow *ui;
@@ -76,8 +76,14 @@ private:
     int xActG2;
     int yActG2;
 
-    bool lifeG2;
-    bool lifeG1;
+    int lifeG2;
+    int lifeG1;
+
+    int hitG1;
+    int hitG2;
+
+    int aTypeG1;
+    int aTypeG2;
 
     //variables para graficar un gladiador
     bool t;
@@ -94,10 +100,13 @@ private:
     QPixmap* G1B;
     QPixmap* G2A;
     QPixmap* G2B;
+    QPixmap* torre;
+    QPixmap* cuadroB;
+    QPixmap* cuadroN;
     QPixmap* ImgFlecha;
 
     //Tirar flechas
-    int torres[20][3];
+    int torres[20][4];
     int iTorre;
 
 };

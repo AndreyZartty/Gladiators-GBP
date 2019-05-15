@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QMatrix>
 #include <QTransform>
+#include <QWidget>
+#include "nextgen.h"
 
 #include "thread.h"
 
@@ -42,15 +44,8 @@ void MainWindow::on_Inicio_clicked()
 
     sendJSON("COMENZAR", "Comenzar");
 
-    hide();
 
-    //Imagenes
-    QPixmap* flechaSencilla = new QPixmap(":/imagenes/flecha sencilla.png");
-    flechaSencilla->setDevicePixelRatio(0.5*zoneSize);
-    QPixmap* flechaFuego = new QPixmap(":/imagenes/flecha fuego-1.png");
-    flechaFuego->setDevicePixelRatio(0.5*zoneSize);
-    QPixmap* flechaExplosivo = new QPixmap(":/imagenes/flecha explosiva.png");
-    flechaExplosivo->setDevicePixelRatio(0.5*zoneSize);
+    hide();
 
     //Crea el laberinto
     QGraphicsTextItem *titulo = new QGraphicsTextItem;
@@ -67,6 +62,11 @@ void MainWindow::on_Inicio_clicked()
     partida->setSceneRect(0,0,1200,600);
     partida->backgroundBrush();
 
+    //Widget Gladiador
+    NextGen* GenG1 = new NextGen();
+    GenG1->move(0,100);
+    //GladW1->add
+
     //Pixeles X y Y
     int pixX = 380;
     int pixY = 100;
@@ -77,9 +77,10 @@ void MainWindow::on_Inicio_clicked()
     //Agrega todos los elementos a la partida
     partida->addPixmap(QPixmap(":/imagenes/fondo.jpg"));
     partida->addItem(titulo);
+    partida->addWidget(GenG1);
 
-    //DibujarTablero();
-    //DibujarTorres();
+    DibujarTablero();
+    DibujarTorres();
 
     //Rellena el array de las torres
     for(int j=0; j<20; j++){
@@ -100,7 +101,7 @@ void MainWindow::on_Inicio_clicked()
 void MainWindow::DibujarTorres(){
 
     //Imagenes
-    QPixmap* torre = new QPixmap(":/imagenes/torre2.png");
+    torre = new QPixmap(":/imagenes/torre2.png");
     torre->setDevicePixelRatio(0.5*zoneSize);
 
     //Para generar torres aleatorias
@@ -120,13 +121,11 @@ void MainWindow::DibujarTorres(){
             break;
         }
 
-        if (i<=3){
+        if (i<20){
             torres[i][0]=i;
             torres[i][1]=xTorreActual;
             torres[i][2]=yTorreActual;
-            if (i==3){
-                i=1;
-            }
+
         }
 
         partida->addPixmap(*torre)->moveBy(xTorreActual,yTorreActual);
@@ -140,9 +139,9 @@ void MainWindow::DibujarTorres(){
 void MainWindow::DibujarTablero(){
 
     //Imagenes
-    QPixmap* cuadroB = new QPixmap(":/imagenes/cuadro-blanco (copy).png");
+    cuadroB = new QPixmap(":/imagenes/cuadro-blanco (copy).png");
     cuadroB->setDevicePixelRatio(0.5*zoneSize);
-    QPixmap* cuadroN = new QPixmap(":/imagenes/cuadro-negro (copy).png");
+    cuadroN = new QPixmap(":/imagenes/cuadro-negro (copy).png");
     cuadroN->setDevicePixelRatio(0.5*zoneSize);
 
     //para mostrar los cuadros de la matriz en partida
@@ -215,49 +214,167 @@ void MainWindow::DibujarTablero(){
 
 void MainWindow::tirarFlechas(){
 
-    for(int j=0;j<20;j++){
+    for(int j=1;j<25;j++){
 
         QString I;
-        I.setNum(torres[j][0]);
+        I.setNum(j);
 
-        if (torres[j][0]==1){
-            ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
-            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+        sendJSON("HITG1", I.toStdString());
+        sendJSON("HITG2", I.toStdString());
+
+        if (hitG1==true){
+
+            sendJSON("ATYPEG1", I.toStdString());
+
+            int direccionG1=aTypeG1%10;
+            int flechaG1=(aTypeG1-direccionG1)/10;
+
+            if (flechaG1==1){
+                ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            else if (flechaG1==2){
+                ImgFlecha = new QPixmap(":/imagenes/flecha fuego-1.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            else if (flechaG1==3){
+                ImgFlecha = new QPixmap(":/imagenes/flecha explosiva.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            if (direccionG1 == 0){
+                //ArribaIzq
+            }
+
+            else if (direccionG1 == 1){
+                //Arriba
+            }
+
+            else if (direccionG1 == 2){
+                //ArribaDer
+            }
+
+            else if (direccionG1 == 3){
+                //Izquierda
+            }
+
+            else if (direccionG1 == 4){
+                //Derecha
+            }
+
+            else if (direccionG1 == 5){
+                //AbajoIzq
+            }
+
+            else if (direccionG1 == 6){
+                //Abajo
+            }
+
+            else if (direccionG1 == 7){
+                //AbajoIDer
+            }
+
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
         }
 
-        if (torres[j][0]==2){
-            ImgFlecha = new QPixmap(":/imagenes/flecha fuego-1.png");
-            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+
+        if (hitG2==true){
+
+            sendJSON("ATYPEG2", I.toStdString());
+
+            int direccionG2=aTypeG2%10;
+            int flechaG2=(aTypeG2-direccionG2)/10;
+
+            if (flechaG2==1){
+                ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            else if (flechaG2==2){
+                ImgFlecha = new QPixmap(":/imagenes/flecha fuego-1.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            else if (flechaG2==3){
+                ImgFlecha = new QPixmap(":/imagenes/flecha explosiva.png");
+                ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
+            }
+
+            if (direccionG2 == 0){
+                //ArribaIzq
+            }
+
+            else if (direccionG2 == 1){
+                //Arriba
+            }
+
+            else if (direccionG2 == 2){
+                //ArribaDer
+            }
+
+            else if (direccionG2 == 3){
+                //Izquierda
+            }
+
+            else if (direccionG2 == 4){
+                //Derecha
+            }
+
+            else if (direccionG2 == 5){
+                //AbajoIzq
+            }
+
+            else if (direccionG2 == 6){
+                //Abajo
+            }
+
+            else if (direccionG2 == 7){
+                //AbajoIDer
+            }
+
+            partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
         }
 
-        if (torres[j][0]==3){
-            ImgFlecha = new QPixmap(":/imagenes/flecha explosiva.png");
-            ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
-        }
 
-        //Gladiador 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*//Gladiador 1
         //Verifica si esta a la derecha
         if (torres[j][1] == (xActG1+(450/zoneSize)) && torres[j][2] == yActG1 ){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
-            sendJSON("LIFEG1", I.toStdString());
+            //sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a la izquierda
         if (torres[j][1] == (xActG1-(450/zoneSize)) && torres[j][2] == yActG1 ){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
-            sendJSON("LIFEG1", I.toStdString());
+            //sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a Arriba
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1-(450/zoneSize))){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
-            sendJSON("LIFEG1", I.toStdString());
+            //sendJSON("LIFEG1", I.toStdString());
         }
 
         //Verifica si esta a Abajo
         if (torres[j][1] == xActG1 && torres[j][2] == (yActG1+(450/zoneSize))){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
-            sendJSON("LIFEG1", I.toStdString());
+            //sendJSON("LIFEG1", I.toStdString());
         }
 
 
@@ -265,26 +382,26 @@ void MainWindow::tirarFlechas(){
         //Verifica si esta a la derecha
         if (torres[j][1] == (xActG2+(450/zoneSize)) && torres[j][2] == yActG2 ){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
-            sendJSON("LIFEG2", I.toStdString());
+            //sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a la izquierda
         if (torres[j][1] == (xActG2-(450/zoneSize)) && torres[j][2] == yActG2 ){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
-            sendJSON("LIFEG2", I.toStdString());
+            //sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a Arriba
         if (torres[j][1] == xActG2 && torres[j][2] == (yActG2-(450/zoneSize))){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
-            sendJSON("LIFEG2", I.toStdString());
+            //sendJSON("LIFEG2", I.toStdString());
         }
 
         //Verifica si esta a Abajo
         if (torres[j][1] == xActG2 && torres[j][2] == (yActG2+(450/zoneSize))){
             partida->addPixmap(*ImgFlecha)->moveBy(xActG2,yActG2);
-            sendJSON("LIFEG2", I.toStdString());
-        }
+            //sendJSON("LIFEG2", I.toStdString());
+        }*/
     }
 }
 
@@ -303,6 +420,10 @@ void MainWindow::graficarGladiador() {
     G2B = new QPixmap(":/imagenes/G2B.png");
     G2B->setDevicePixelRatio(0.5*zoneSize);
 
+    //Cuadro Encima del jugador
+    cuadroB = new QPixmap(":/imagenes/cuadro-blanco (copy).png");
+    cuadroB->setDevicePixelRatio(0.5*zoneSize);
+
     bool move = true;
 
     ///Cuando hay que cambiar las torres de posicion
@@ -320,17 +441,25 @@ void MainWindow::graficarGladiador() {
         timer = new QTimer(this);
 
         //while(t==false){
-            connect(timer,SIGNAL(timeout()), this, SLOT(grafGlad()));
+            connect(timer,SIGNAL(timeout()), this, SLOT(AuxGraficarGladiador()));
             timer->start(1000);
         //}
     }
 
 }
 
-void MainWindow::grafGlad(){
+void MainWindow::AuxGraficarGladiador(){
 
-    DibujarTablero();
+    //DibujarTablero();
     DibujarTorres();
+
+    if (xActG1 > 1 && yActG1>1){
+        partida->addPixmap(*cuadroB)->moveBy(xActG1,yActG1);
+    }
+
+    if (xActG2 >1 && yActG2>1){
+        partida->addPixmap(*cuadroB)->moveBy(xActG2,yActG2);
+    }
 
     QString I;
     I.setNum(iGlad);
@@ -343,13 +472,7 @@ void MainWindow::grafGlad(){
     sendJSON("XCOORDGP2", I.toStdString());
     sendJSON("YCOORDGP2", I.toStdString());
 
-    tirarFlechas();
-
-    //Hay que quitar este if porque lo estoy obligando
-    /*if (iGlad==0){
-        xActG2=xActG1;
-        yActG2=yActG1;
-    }*/
+    //tirarFlechas();
 
     if (xActG1==-1 && yActG1==-1 && xActG2==-1 && yActG2==-1){
         t=true;
@@ -358,17 +481,17 @@ void MainWindow::grafGlad(){
         timer->stop();
     }
 
-    if (lifeG1==false && lifeG2==true){
-        QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiador 1 Y 2 Muertos"));
+    /*if (lifeG1==1 && lifeG2==1){
+        //QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiador 1 Y 2 Muertos"));
     }
 
-    if (lifeG1==false && lifeG2==true){
-        QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 1 Muerto, Gladiador 2 Vivo"));
+    if (lifeG1==1 && lifeG2==0){
+        //QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 1 Muerto, Gladiador 2 Vivo"));
     }
 
-    if (lifeG2==false && lifeG1==true){
-        QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 2 Muerto, Gladiador 1 Vivo"));
-    }
+    if (lifeG2==1 && lifeG1==0){
+        //QMessageBox::information(this, tr("Gladiador Matado"), tr("Gladiador 2 Muerto, Gladiador 1 Vivo"));
+    }*/
 
     if (xActG1!=-1 && yActG1!=-1){
 
@@ -396,12 +519,16 @@ void MainWindow::grafGlad(){
             partida->addPixmap(*G2B)->moveBy(xActG2,yActG2);
             turnoImgGlad2=0;
         }
+
+
         cout<<xActG2<<","<<yActG2<<endl;
         cout<<(iGlad)<<endl;
 
     }
 
     iGlad++;
+
+
 
 }
 
@@ -427,7 +554,7 @@ int MainWindow::sendJSON(string KEY, string data){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("10.0.2.15"); //192.168.100.6
+        client.sin_addr.s_addr = inet_addr("192.168.100.6"); //192.168.100.6
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -512,11 +639,25 @@ int MainWindow::sendJSON(string KEY, string data){
         yActG1 = json_object_get_int(yG1);
     }
 
-    struct json_object *LifeG1;
+    /*struct json_object *LifeG1;
     json_object *parsed_jsonLifeG1 = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonLifeG1, "LIFEG1", &LifeG1);
-    if (json_object_get_boolean(LifeG1) != 0){
-        lifeG1 = json_object_get_boolean(LifeG1);
+    if (json_object_get_int(LifeG1) != 0){
+        lifeG1 = json_object_get_int(LifeG1);
+    }*/
+
+    struct json_object *HITG1;
+    json_object *parsed_jsonHITG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonHITG1, "HITG1", &HITG1);
+    if (json_object_get_int(HITG1) != 0){
+        hitG1 = json_object_get_int(HITG1);
+    }
+
+    struct json_object *ATYPEG1;
+    json_object *parsed_jsonATYPEG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonATYPEG1, "ATYPEG1", &ATYPEG1);
+    if (json_object_get_int(ATYPEG1) != 0){
+        aTypeG1 = json_object_get_int(ATYPEG1);
     }
 
 
@@ -536,12 +677,27 @@ int MainWindow::sendJSON(string KEY, string data){
         yActG2 = json_object_get_int(yG2);
     }
 
-    struct json_object *LifeG2;
+    /*struct json_object *LifeG2;
     json_object *parsed_jsonLifeG2 = json_tokener_parse(recvBuff);
     json_object_object_get_ex(parsed_jsonLifeG2, "LIFEG2", &LifeG2);
-    if (json_object_get_boolean(LifeG2) != 0){
-        lifeG2 = json_object_get_boolean(LifeG2);
+    if (json_object_get_int(LifeG2) != 0){
+        lifeG2 = json_object_get_int(LifeG2);
+    }*/
+
+    struct json_object *HITG2;
+    json_object *parsed_jsonHITG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonHITG2, "HITG2", &HITG2);
+    if (json_object_get_int(HITG2) != 0){
+        hitG2 = json_object_get_int(HITG2);
     }
+
+    struct json_object *ATYPEG2;
+    json_object *parsed_jsonATYPEG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonATYPEG2, "ATYPEG2", &ATYPEG2);
+    if (json_object_get_int(ATYPEG2) != 0){
+        aTypeG2 = json_object_get_int(ATYPEG2);
+    }
+
 
     ///Se limpian los Buffers
     memset(recvBuff, 0, MAXDATASIZE);
