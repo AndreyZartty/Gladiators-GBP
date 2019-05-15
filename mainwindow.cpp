@@ -112,7 +112,7 @@ void MainWindow::on_Inicio_clicked()
     DibujarTorres();
 
     //Para Graficar los gladiadores
-    graficarGladiador();
+    //graficarGladiador();
 
 
 
@@ -139,6 +139,10 @@ void MainWindow::DibujarTorres(){
 
         QString I;
         I.setNum(i);
+
+        cout << "Coords torre" << endl;
+        cout << "Coords x: " << xTorreActual << endl;
+        cout << "Coords y: " << yTorreActual << endl;
 
         sendJSON("XCOORDTORRE", I.toStdString());
         sendJSON("YCOORDTORRE", I.toStdString());
