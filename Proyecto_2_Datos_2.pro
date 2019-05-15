@@ -18,17 +18,23 @@ SOURCES += main.cpp\
     node.cpp \
     torres.cpp \
     nextgen.cpp \
-    thread.cpp
+    thread.cpp \
+    nextgen2.cpp \
+    visualizarpoblaciones.cpp
 
 HEADERS  += mainwindow.h \
     tablero.h \
     node.h \
     torres.h \
     nextgen.h \
-    thread.h
+    thread.h \
+    nextgen2.h \
+    visualizarpoblaciones.h
 
 FORMS    += mainwindow.ui \
-    nextgen.ui
+    nextgen.ui \
+    nextgen2.ui \
+    visualizarpoblaciones.ui
 
 RESOURCES += \
     imagenes.qrc

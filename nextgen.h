@@ -15,6 +15,8 @@ public:
     explicit NextGen(QWidget *parent = 0);
     ~NextGen();
 
+    void modificarLabel(int i, QString label);
+
 private:
     Ui::NextGen *ui;
 };

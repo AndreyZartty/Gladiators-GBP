@@ -22,6 +22,8 @@
 #include <QMessageBox>
 
 #include "nextgen.h"
+#include "nextgen2.h"
+#include "visualizarpoblaciones.h"
 
 #include "tablero.h"
 
@@ -37,7 +39,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow//, public VisualizarPoblaciones
 {
     Q_OBJECT
 
@@ -52,7 +54,8 @@ public:
     void DibujarTablero();
     void DibujarTorres();
     void graficarGladiador();
-    void tirarFlechas();
+    void tirarFlechasG1();
+    void tirarFlechasG2();
 
 private slots:
     void on_Inicio_clicked();
@@ -62,6 +65,9 @@ private:
     Ui::MainWindow *ui;
 
     NextGen* nextG;
+
+    //QGraphicsView
+    QGraphicsView * view;
 
     int zoneSize;
     int turn;
@@ -76,14 +82,18 @@ private:
     int xActG2;
     int yActG2;
 
-    int lifeG2;
-    int lifeG1;
+    string resistenciaTestG1;
 
+    int resistenciaG2;
+    int resistenciaG1;
     int hitG1;
     int hitG2;
-
     int aTypeG1;
     int aTypeG2;
+    int xCoordG1;
+    int xCoordG2;
+    int yCoordG1;
+    int yCoordG2;
 
     //variables para graficar un gladiador
     bool t;
@@ -95,7 +105,7 @@ private:
 
     QTimer *timer;
 
-    //imagenes
+    //Imagenes
     QPixmap* G1A;
     QPixmap* G1B;
     QPixmap* G2A;
@@ -104,10 +114,14 @@ private:
     QPixmap* cuadroB;
     QPixmap* cuadroN;
     QPixmap* ImgFlecha;
+    QPixmap* ImgFlecha2;
 
     //Tirar flechas
-    int torres[20][4];
     int iTorre;
+
+    //Widget
+    NextGen* GenG1;
+    NextGen2* GenG2;
 
 };
 

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NextGen</class>
- <widget class="QDialog" name="NextGen">
+ <class>NextGen2</class>
+ <widget class="QWidget" name="NextGen2">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>448</height>
+    <width>400</width>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Form</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>10</y>
      <width>311</width>
      <height>31</height>
@@ -30,33 +30,13 @@
     </font>
    </property>
    <property name="text">
-    <string>POBLACION 1 : GLADIADOR 1</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Nombre:</string>
+    <string>POBLACION 2 : GLADIADOR 2</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>110</y>
      <width>131</width>
      <height>31</height>
@@ -73,90 +53,10 @@
     <string>Edad:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>180</y>
-     <width>321</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Probabilidad de Supervivencia:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>250</y>
-     <width>231</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Inteligencia Emocional:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>320</y>
-     <width>271</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Fuerza de Tronco Superior:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>390</y>
-     <width>261</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Fuerza de Tronco Inferior:</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>200</x>
      <y>110</y>
      <width>131</width>
      <height>31</height>
@@ -173,11 +73,31 @@
     <string>Resistencia:</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>320</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Fuerza de Tronco Superior:</string>
+   </property>
+  </widget>
   <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>-20</y>
+     <y>40</y>
      <width>121</width>
      <height>131</height>
     </rect>
@@ -193,16 +113,116 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="imagenes.qrc">:/imagenes/G2A.png</pixmap>
+    <pixmap resource="imagenes.qrc">:/imagenes/G1A.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Probabilidad de Supervivencia:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nombre:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>231</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Inteligencia Emocional:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>390</y>
+     <width>261</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string>Fuerza de Tronco Inferior:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="inteligencia">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>250</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <widget class="QLabel" name="nombre">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>100</x>
      <y>50</y>
      <width>91</width>
      <height>31</height>
@@ -219,11 +239,31 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="edad">
+  <widget class="QLabel" name="tronco_superior">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>110</y>
+     <x>280</x>
+     <y>320</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Bookman L</family>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tronco_inferior">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>390</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -242,7 +282,7 @@
   <widget class="QLabel" name="resistencia">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>320</x>
      <y>110</y>
      <width>91</width>
      <height>31</height>
@@ -262,7 +302,7 @@
   <widget class="QLabel" name="probabilidad">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>280</x>
      <y>180</y>
      <width>91</width>
      <height>31</height>
@@ -279,51 +319,11 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="inteligencia">
+  <widget class="QLabel" name="edad">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>250</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="tronco_inferior">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>390</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>URW Bookman L</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="tronco_superior">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>320</y>
+     <x>90</x>
+     <y>110</y>
      <width>91</width>
      <height>31</height>
     </rect>

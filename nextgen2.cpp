@@ -1,19 +1,19 @@
-#include "nextgen.h"
-#include "ui_nextgen.h"
+#include "nextgen2.h"
+#include "ui_nextgen2.h"
 
-NextGen::NextGen(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::NextGen)
+NextGen2::NextGen2(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::NextGen2)
 {
     ui->setupUi(this);
 }
 
-NextGen::~NextGen()
+NextGen2::~NextGen2()
 {
     delete ui;
 }
 
-void NextGen::modificarLabel(int i, QString label){
+void NextGen2::modificarLabel(int i, QString label){
 
     //ui->V1A->setText("V"+QString::number(procesoA->getVehiculo1()->getTipo())+":");
 
