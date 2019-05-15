@@ -1,3 +1,12 @@
+/**
+  * @file mainwindow.h
+  * @version 1.0
+  * @date 15/05/2019
+  * @authors Edgar Gonzales, Ruben Salas, Andrey Sanchez, Jose Solano
+  * @title Pantalla Principal
+  */
+
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -44,21 +53,60 @@ class MainWindow : public QMainWindow//, public VisualizarPoblaciones
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief MainWindow Crea la pantalla principal
+     * @param parent QWidget en donde se va a colocar
+     */
     explicit MainWindow(QWidget *parent = 0);
 
     static QGraphicsScene* partida;
 
     ~MainWindow();
 
+    /**
+     * @brief sendJSON Solicita diferentes X's y Y's para graficar y datos para setear en labels
+     * @param KEY Llave que se va a enviar
+     * @param data String con informacion que se va a enviar
+     * @return int Para terminar la funcion
+     */
     int sendJSON(string KEY, string data);
+
+    /**
+     * @brief DibujarTablero Dibuja el laberinto
+     */
     void DibujarTablero();
+
+    /**
+     * @brief DibujarTorres Dibuja las torres en el laberinto
+     */
     void DibujarTorres();
+
+    /**
+     * @brief graficarGladiador Dibuja los gladiadores en el laberinto
+     */
     void graficarGladiador();
+
+    /**
+     * @brief tirarFlechasG1 Dibuja las flechas para el gladiador 1 cuando se ataca
+     */
     void tirarFlechasG1();
+
+    /**
+     * @brief tirarFlechasG2 Dibuja las flechas para el gladiador 2 cuando se ataca
+     */
     void tirarFlechasG2();
 
 private slots:
+
+    /**
+     * @brief on_Inicio_clicked Inicia el juego
+     */
     void on_Inicio_clicked();
+
+    /**
+     * @brief AuxGraficarGladiador Thread de graficacion del gladiador
+     */
     void AuxGraficarGladiador();
 
 private:
