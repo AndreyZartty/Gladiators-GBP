@@ -15,6 +15,9 @@ public:
     explicit VisualizarPoblaciones(QWidget *parent = 0);
     ~VisualizarPoblaciones();
 
+    bool botonC();
+    bool botonV();
+
 private slots:
     void on_botonContinuar_clicked();
 
@@ -22,6 +25,9 @@ private slots:
 
 private:
     Ui::VisualizarPoblaciones *ui;
+
+    bool BC;
+    bool BV;
 };
 
 #endif // VISUALIZARPOBLACIONES_H

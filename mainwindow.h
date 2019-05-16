@@ -21,6 +21,8 @@
 #include <json-c/json_object.h>
 #include <QMessageBox>
 
+#include <QPushButton>
+
 #include "nextgen.h"
 #include "nextgen2.h"
 #include "visualizarpoblaciones.h"
@@ -122,6 +124,13 @@ private:
     //Widget
     NextGen* GenG1;
     NextGen2* GenG2;
+
+    //Botones
+    QPushButton* botonEstadisticas;
+    QPushButton* botonContinuar;
+
+    //Vizualizar Poblaciones
+    VisualizarPoblaciones* ViewPobla;
 
 };
 

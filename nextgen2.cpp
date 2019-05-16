@@ -43,4 +43,7 @@ void NextGen2::modificarLabel(int i, QString label){
     if (i==6){
         ui->tronco_inferior->setText(label);
     }
+    if (i==7){
+        ui->expectativa->setText(label);
+    }
 }

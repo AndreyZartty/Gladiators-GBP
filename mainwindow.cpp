@@ -64,7 +64,7 @@ void MainWindow::on_Inicio_clicked()
     turn = 1;
 
     sendJSON("COMENZAR", "Comenzar");
-
+    sendJSON("INICIAR", "0");
 
     hide();
 
@@ -262,10 +262,10 @@ void MainWindow::tirarFlechasG1(){
 
             else {
 
-                //int direccionG1=aTypeG1%10;
+                int direccionG1=aTypeG1%10;
                 int flechaG1=(aTypeG1)/10;
 
-
+                QPixmap ImgFlecha1;
                 if (flechaG1==1){
                     ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
                     ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
@@ -281,32 +281,32 @@ void MainWindow::tirarFlechasG1(){
                     ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
                 }
 
-                /*if (direccionG1 == 0){
+                if (direccionG1 == 0){
                     //ArribaIzq
                     QMatrix rm;
                     rm.rotate(135);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 1){
                     //Arriba
                     QMatrix rm;
                     rm.rotate(90);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 2){
                     //ArribaDer
                     QMatrix rm;
                     rm.rotate(45);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 3){
                     //Izquierda
                     QMatrix rm;
                     rm.rotate(180);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 4){
@@ -318,24 +318,24 @@ void MainWindow::tirarFlechasG1(){
                     //AbajoIzq
                     QMatrix rm;
                     rm.rotate(225);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 6){
                     //Abajo
                     QMatrix rm;
                     rm.rotate(270);
-                    ImgFlecha = ImgFlecha->transformed(rm);
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 7){
                     //AbajoIDer
                     QMatrix rm;
                     rm.rotate(315);
-                    ImgFlecha = ImgFlecha->transformed(rm);
-                }*/
+                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                }
 
-                partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
+                partida->addPixmap(ImgFlecha1)->moveBy(xActG1,yActG1);
             }
 
         }
@@ -382,8 +382,10 @@ void MainWindow::tirarFlechasG2(){
 
             else {
 
-                //int direccionG2=aTypeG2%10;
+                int direccionG2=aTypeG2%10;
                 int flechaG2=(aTypeG2)/10;
+
+                QPixmap ImgFlecha21;
 
                 if (flechaG2==1){
                     ImgFlecha2 = new QPixmap(":/imagenes/flecha sencilla.png");
@@ -400,61 +402,61 @@ void MainWindow::tirarFlechasG2(){
                     ImgFlecha2->setDevicePixelRatio(0.5*zoneSize);
                 }
 
-                /*if (direccionG2 == 0){
+                if (direccionG2 == 0){
                     //ArribaIzq
                     QMatrix rm;
                     rm.rotate(135);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 = ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 1){
+                else if (direccionG2 == 1){
                     //Arriba
                     QMatrix rm;
                     rm.rotate(90);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 2){
+                else if (direccionG2 == 2){
                     //ArribaDer
                     QMatrix rm;
                     rm.rotate(45);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 3){
+                else if (direccionG2 == 3){
                     //Izquierda
                     QMatrix rm;
                     rm.rotate(180);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 4){
+                else if (direccionG2 == 4){
                     //Derecha
                     //viene por default
                 }
 
-                else if (direccionG1 == 5){
+                else if (direccionG2 == 5){
                     //AbajoIzq
                     QMatrix rm;
                     rm.rotate(225);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 6){
+                else if (direccionG2 == 6){
                     //Abajo
                     QMatrix rm;
                     rm.rotate(270);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
                 }
 
-                else if (direccionG1 == 7){
+                else if (direccionG2 == 7){
                     //AbajoIDer
                     QMatrix rm;
                     rm.rotate(315);
-                    ImgFlecha2 = ImgFlecha2->transformed(rm);
-                }*/
+                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                }
 
-                partida->addPixmap(*ImgFlecha2)->moveBy(xActG2,yActG2);
+                partida->addPixmap(ImgFlecha21)->moveBy(xActG2,yActG2);
             }
         }
 
@@ -501,6 +503,7 @@ void MainWindow::graficarGladiador() {
     ///Cuando hay que cambiar las torres de posicion
     if (turn % 3 == 0) {
 
+        //sendJSON("INICIAR", "2");
 
     } else {
         //Para graficar los gladiadores
@@ -525,6 +528,8 @@ void MainWindow::AuxGraficarGladiador(){
     //DibujarTablero();
     //DibujarTorres();
 
+    sendJSON("LIVELABELS", "1");
+
     if (xActG1 > 1 && yActG1>1){
         partida->addPixmap(*cuadroB)->moveBy(xActG1,yActG1);
     }
@@ -540,7 +545,7 @@ void MainWindow::AuxGraficarGladiador(){
         //QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiadores Muertos"));
 
         //JSON para continuar ciclo
-        sendJSON("REINICIAR", "0");
+        sendJSON("INICIAR", "1");
         sendJSON("NEXTPOSITIONG1","1");
         sendJSON("NEXTPOSITIONG2","1");
         partida->clear();
@@ -571,12 +576,30 @@ void MainWindow::AuxGraficarGladiador(){
     if ((xActG1==-1 && yActG1==-1) || (xActG2==-1 && yActG2==-1)){
         t=true;
         cout<<"Final del thread"<<endl;
-        QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
+
+        //Agrega una ventana nueva
+        ViewPobla = new VisualizarPoblaciones();
+        ViewPobla->move(380,200);
+        partida->addWidget(ViewPobla);
+
+        //QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
         sendJSON("NEXTPOSITIONG1","1");
         sendJSON("NEXTPOSITIONG2","1");
-        sendJSON("REINICIAR","0");
+        sendJSON("INICIAR", "1");
         timer->stop();
-        on_Inicio_clicked();
+
+        bool botonCon = ViewPobla->botonC();
+        bool botonMost = ViewPobla->botonV();
+
+        if (botonCon==true){
+            on_Inicio_clicked();
+        }
+
+        if (botonMost==true){
+            cout<<"Mostrar Generaciones"<<endl;
+            //mostrarGeneraciones();
+        }
+
     }
 
     if (xActG1!=-1 && yActG1!=-1){
@@ -641,7 +664,7 @@ int MainWindow::sendJSON(string KEY, string data){
     {
         client.sin_family = AF_INET;
         client.sin_port = htons(PORT);
-        client.sin_addr.s_addr = inet_addr("192.168.100.6"); //192.168.100.6
+        client.sin_addr.s_addr = inet_addr("10.0.2.15"); //192.168.100.6
         memset(client.sin_zero, '\0', sizeof(client.sin_zero));
     }
 
@@ -811,6 +834,145 @@ int MainWindow::sendJSON(string KEY, string data){
     if (json_object_get_int(YCOORDFLECHAG2) != 0){
         yCoordG2 = json_object_get_int(YCOORDFLECHAG2);
     }
+
+
+    ///JSON de los labels en tiempo real del gladiador
+
+    ///Gladiador 1 Datos
+    struct json_object *NOMBREG1;
+    json_object *parsed_jsonNOMBREG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonNOMBREG1, "NOMBREG1", &NOMBREG1);
+    if (json_object_get_string(NOMBREG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(NOMBREG1));
+        GenG1->modificarLabel(0, qstr);
+    }
+
+    struct json_object *EDADG1;
+    json_object *parsed_jsonEDADG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonEDADG1, "EDADG1", &EDADG1);
+    if (json_object_get_string(EDADG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(EDADG1));
+        GenG1->modificarLabel(1, qstr);
+    }
+
+    struct json_object *RESISTENCIAG1;
+    json_object *parsed_jsonRESISTENCIAG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonRESISTENCIAG1, "RESISTENCIAG1", &RESISTENCIAG1);
+    if (json_object_get_string(RESISTENCIAG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(RESISTENCIAG1));
+        GenG1->modificarLabel(2, qstr);
+    }
+
+    struct json_object *PROBABILIDADG1;
+    json_object *parsed_jsonPROBABILIDADG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonPROBABILIDADG1, "PROBABILIDADG1", &PROBABILIDADG1);
+    if (json_object_get_string(PROBABILIDADG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(PROBABILIDADG1));
+        GenG1->modificarLabel(3, qstr);
+    }
+
+    struct json_object *INTELIGENCIAG1;
+    json_object *parsed_jsonINTELIGENCIAG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonINTELIGENCIAG1, "INTELIGENCIAG1", &INTELIGENCIAG1);
+    if (json_object_get_string(INTELIGENCIAG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(INTELIGENCIAG1));
+        GenG1->modificarLabel(4, qstr);
+    }
+
+    struct json_object *TSUPERIORG1;
+    json_object *parsed_jsonTSUPERIORG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonTSUPERIORG1, "TSUPERIORG1", &TSUPERIORG1);
+    if (json_object_get_string(TSUPERIORG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(TSUPERIORG1));
+        GenG1->modificarLabel(5, qstr);
+    }
+
+    struct json_object *TINFERIORG1;
+    json_object *parsed_jsonTINFERIORG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonTINFERIORG1, "TINFERIORG1", &TINFERIORG1);
+    if (json_object_get_string(TSUPERIORG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(TINFERIORG1));
+        GenG1->modificarLabel(6, qstr);
+    }
+
+    struct json_object *EXPECTATIVAG1;
+    json_object *parsed_jsonEXPECTATIVAG1 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonEXPECTATIVAG1, "EXPECTATIVAG1", &EXPECTATIVAG1);
+    if (json_object_get_string(EXPECTATIVAG1) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(EXPECTATIVAG1));
+        GenG1->modificarLabel(7, qstr);
+    }
+
+
+    ///Gladiador 2 Datos
+    struct json_object *NOMBREG2;
+    json_object *parsed_jsonNOMBREG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonNOMBREG2, "NOMBREG2", &NOMBREG2);
+    if (json_object_get_string(NOMBREG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(NOMBREG2));
+        GenG2->modificarLabel(0, qstr);
+    }
+
+    struct json_object *EDADG2;
+    json_object *parsed_jsonEDADG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonEDADG2, "EDADG2", &EDADG2);
+    if (json_object_get_string(EDADG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(EDADG2));
+        GenG2->modificarLabel(1, qstr);
+    }
+
+    struct json_object *RESISTENCIAG2;
+    json_object *parsed_jsonRESISTENCIAG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonRESISTENCIAG2, "RESISTENCIAG2", &RESISTENCIAG2);
+    if (json_object_get_string(RESISTENCIAG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(RESISTENCIAG2));
+        GenG2->modificarLabel(2, qstr);
+    }
+
+    struct json_object *PROBABILIDADG2;
+    json_object *parsed_jsonPROBABILIDADG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonPROBABILIDADG2, "PROBABILIDADG2", &PROBABILIDADG2);
+    if (json_object_get_string(PROBABILIDADG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(PROBABILIDADG2));
+        GenG1->modificarLabel(3, qstr);
+    }
+
+    struct json_object *INTELIGENCIAG2;
+    json_object *parsed_jsonINTELIGENCIAG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonINTELIGENCIAG2, "INTELIGENCIAG2", &INTELIGENCIAG2);
+    if (json_object_get_string(INTELIGENCIAG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(INTELIGENCIAG2));
+        GenG2->modificarLabel(4, qstr);
+    }
+
+    struct json_object *TSUPERIORG2;
+    json_object *parsed_jsonTSUPERIORG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonTSUPERIORG2, "TSUPERIORG2", &TSUPERIORG2);
+    if (json_object_get_string(TSUPERIORG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(TSUPERIORG2));
+        GenG2->modificarLabel(5, qstr);
+    }
+
+    struct json_object *TINFERIORG2;
+    json_object *parsed_jsonTINFERIORG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonTINFERIORG2, "TINFERIORG2", &TINFERIORG2);
+    if (json_object_get_string(TSUPERIORG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(TINFERIORG2));
+        GenG2->modificarLabel(6, qstr);
+    }
+
+    struct json_object *EXPECTATIVAG2;
+    json_object *parsed_jsonEXPECTATIVAG2 = json_tokener_parse(recvBuff);
+    json_object_object_get_ex(parsed_jsonEXPECTATIVAG2, "EXPECTATIVAG2", &EXPECTATIVAG2);
+    if (json_object_get_string(EXPECTATIVAG2) != 0) {
+        QString qstr = QString::fromStdString(json_object_get_string(EXPECTATIVAG2));
+        GenG2->modificarLabel(7, qstr);
+    }
+
+
+
+    ///KEYS Para Las Poblaciones
+
 
 
     ///Se limpian los Buffers

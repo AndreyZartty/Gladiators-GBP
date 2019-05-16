@@ -6,6 +6,9 @@ VisualizarPoblaciones::VisualizarPoblaciones(QWidget *parent) :
     ui(new Ui::VisualizarPoblaciones)
 {
     ui->setupUi(this);
+
+    BC=false;
+    BV=false;
 }
 
 VisualizarPoblaciones::~VisualizarPoblaciones()
@@ -16,10 +19,18 @@ VisualizarPoblaciones::~VisualizarPoblaciones()
 
 void VisualizarPoblaciones::on_botonContinuar_clicked()
 {
-
+    BC=true;
 }
 
 void VisualizarPoblaciones::on_botonMostrar_clicked()
 {
+    BV=true;
+}
 
+bool VisualizarPoblaciones::botonV(){
+    return BV;
+}
+
+bool VisualizarPoblaciones::botonC(){
+    return BC;
 }
