@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     view->setFixedSize(1200,600);
     partida->setSceneRect(0,0,1200,600);
     partida->backgroundBrush();
+
+    turn=0;
 }
 
 MainWindow::~MainWindow()
@@ -61,7 +63,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_Inicio_clicked()
 {
     ///Turno actual -> iteracion
-    turn = 1;
+    turn +=1;
 
     sendJSON("COMENZAR", "Comenzar");
     sendJSON("INICIAR", "0");
@@ -112,7 +114,7 @@ void MainWindow::on_Inicio_clicked()
     DibujarTorres();
 
     //Para Graficar los gladiadores
-    //graficarGladiador();
+    graficarGladiador();
 
 
 
@@ -269,7 +271,8 @@ void MainWindow::tirarFlechasG1(){
                 int direccionG1=aTypeG1%10;
                 int flechaG1=(aTypeG1)/10;
 
-                QPixmap ImgFlecha1;
+                cout<<"DireccionG1: "<<direccionG1<<endl;
+
                 if (flechaG1==1){
                     ImgFlecha = new QPixmap(":/imagenes/flecha sencilla.png");
                     ImgFlecha->setDevicePixelRatio(0.5*zoneSize);
@@ -289,28 +292,28 @@ void MainWindow::tirarFlechasG1(){
                     //ArribaIzq
                     QMatrix rm;
                     rm.rotate(135);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 1){
                     //Arriba
                     QMatrix rm;
                     rm.rotate(90);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 2){
                     //ArribaDer
                     QMatrix rm;
                     rm.rotate(45);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 3){
                     //Izquierda
                     QMatrix rm;
                     rm.rotate(180);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 4){
@@ -322,24 +325,24 @@ void MainWindow::tirarFlechasG1(){
                     //AbajoIzq
                     QMatrix rm;
                     rm.rotate(225);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 6){
                     //Abajo
                     QMatrix rm;
                     rm.rotate(270);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
                 else if (direccionG1 == 7){
                     //AbajoIDer
                     QMatrix rm;
                     rm.rotate(315);
-                    ImgFlecha1 =ImgFlecha->transformed(rm);
+                    ImgFlecha->transformed(rm);
                 }
 
-                partida->addPixmap(ImgFlecha1)->moveBy(xActG1,yActG1);
+                partida->addPixmap(*ImgFlecha)->moveBy(xActG1,yActG1);
             }
 
         }
@@ -389,7 +392,7 @@ void MainWindow::tirarFlechasG2(){
                 int direccionG2=aTypeG2%10;
                 int flechaG2=(aTypeG2)/10;
 
-                QPixmap ImgFlecha21;
+                cout<<"DireccionG2: "<<direccionG2<<endl;
 
                 if (flechaG2==1){
                     ImgFlecha2 = new QPixmap(":/imagenes/flecha sencilla.png");
@@ -410,28 +413,28 @@ void MainWindow::tirarFlechasG2(){
                     //ArribaIzq
                     QMatrix rm;
                     rm.rotate(135);
-                    ImgFlecha21 = ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 1){
                     //Arriba
                     QMatrix rm;
                     rm.rotate(90);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 2){
                     //ArribaDer
                     QMatrix rm;
                     rm.rotate(45);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 3){
                     //Izquierda
                     QMatrix rm;
                     rm.rotate(180);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 4){
@@ -443,24 +446,24 @@ void MainWindow::tirarFlechasG2(){
                     //AbajoIzq
                     QMatrix rm;
                     rm.rotate(225);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 6){
                     //Abajo
                     QMatrix rm;
                     rm.rotate(270);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
                 else if (direccionG2 == 7){
                     //AbajoIDer
                     QMatrix rm;
                     rm.rotate(315);
-                    ImgFlecha21 =ImgFlecha2->transformed(rm);
+                    ImgFlecha2->transformed(rm);
                 }
 
-                partida->addPixmap(ImgFlecha21)->moveBy(xActG2,yActG2);
+                partida->addPixmap(*ImgFlecha2)->moveBy(xActG2,yActG2);
             }
         }
 
@@ -507,7 +510,7 @@ void MainWindow::graficarGladiador() {
     ///Cuando hay que cambiar las torres de posicion
     if (turn % 3 == 0) {
 
-        //sendJSON("INICIAR", "2");
+        sendJSON("INICIAR", "1");
 
     } else {
         //Para graficar los gladiadores
@@ -545,19 +548,6 @@ void MainWindow::AuxGraficarGladiador(){
     QString I;
     I.setNum(iGlad);
 
-    if (resistenciaG1==0 && resistenciaG2==0){
-        //QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiadores Muertos"));
-
-        //JSON para continuar ciclo
-        sendJSON("INICIAR", "1");
-        sendJSON("NEXTPOSITIONG1","1");
-        sendJSON("NEXTPOSITIONG2","1");
-        partida->clear();
-        timer->stop();
-        on_Inicio_clicked();
-
-    }
-
     if (resistenciaG1!=0){
         //Gladiador 1
         sendJSON("XCOORDGP1", I.toStdString());
@@ -577,6 +567,19 @@ void MainWindow::AuxGraficarGladiador(){
     }
 
 
+    if (resistenciaG1==0 && resistenciaG2==0){
+        //QMessageBox::information(this, tr("Gladiadores Matados"), tr("Gladiadores Muertos"));
+
+        //JSON para continuar ciclo
+        sendJSON("INICIAR", "1");
+        sendJSON("NEXTPOSITIONG1","1");
+        sendJSON("NEXTPOSITIONG2","1");
+        partida->clear();
+        timer->stop();
+        on_Inicio_clicked();
+
+    }
+
     if ((xActG1==-1 && yActG1==-1) || (xActG2==-1 && yActG2==-1)){
         t=true;
         cout<<"Final del thread"<<endl;
@@ -586,23 +589,38 @@ void MainWindow::AuxGraficarGladiador(){
         ViewPobla->move(380,200);
         partida->addWidget(ViewPobla);
 
+        bool botonCon = ViewPobla->botonC();
+        bool botonMost = ViewPobla->botonV();
+
+        cout<<botonCon<<endl;
+        cout<<botonMost<<endl;
+
+        if (botonCon==true){
+            //QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
+            sendJSON("NEXTPOSITIONG1","1");
+            sendJSON("NEXTPOSITIONG2","1");
+            sendJSON("INICIAR", "1");
+            on_Inicio_clicked();
+        }
+
+        else if (botonMost==true){
+            cout<<"Mostrar Generaciones"<<endl;
+            timer->stop();
+            //mostrarGeneraciones();
+        }
+
+        else {
+
+        //QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
+
+        }
+
         //QMessageBox::information(this, tr("Final de Juego"), tr("Juego Terminado"));
         sendJSON("NEXTPOSITIONG1","1");
         sendJSON("NEXTPOSITIONG2","1");
         sendJSON("INICIAR", "1");
         timer->stop();
-
-        bool botonCon = ViewPobla->botonC();
-        bool botonMost = ViewPobla->botonV();
-
-        if (botonCon==true){
-            on_Inicio_clicked();
-        }
-
-        if (botonMost==true){
-            cout<<"Mostrar Generaciones"<<endl;
-            //mostrarGeneraciones();
-        }
+        on_Inicio_clicked();
 
     }
 
@@ -630,6 +648,14 @@ void MainWindow::AuxGraficarGladiador(){
             turnoImgGlad2=0;
         }
 
+
+    }
+
+    ///Cuando hay que cambiar las torres de posicion
+    if (turn % 3 == 0) {
+
+        //sendJSON("INICIAR", "1")
+        //sendJSON("INICIAR", "2");
 
     }
 
